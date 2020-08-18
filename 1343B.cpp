@@ -56,12 +56,28 @@ int main(){
     ll test;
     cin >> test;
     while(test--){
-        ll n;
+        ll n, temp, rem = 0, sum = 0;
         cin >> n;
-        rep(i,0,n){
-            cout << i+1 << ' ';
+        if(n%4 != 0){
+            cout << "NO" <<endl;
+        }else if(n%4 == 0){
+            cout << "YES" <<endl;
+            for(int i=2; i<=n; i+=2){
+                cout << i << ' ';
+                sum += i;
+            }
+            for(int i=1; i<n-1; i+=2){
+                cout << i << ' ';
+                temp = i;
+                rem += i; 
+            }
+            if(temp == 1){
+                temp = -1;
+            }
+            cout << sum - rem;
+            cout << endl;
         }
-        cout << endl;
+
     }
 return 0;
 }

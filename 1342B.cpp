@@ -56,12 +56,39 @@ int main(){
     ll test;
     cin >> test;
     while(test--){
-        ll n;
-        cin >> n;
-        rep(i,0,n){
-            cout << i+1 << ' ';
+        string t;
+        cin >> t;
+        ll numOne = 0, numZero = 0;
+        rep(i,0,t.length()){
+            ll val = t[i] - '0';
+            if(val == 0){
+                numZero++;
+            }else{
+                numOne++;
+            }
         }
-        cout << endl;
+        char one = '1';
+        char zer = '0';
+        
+        string s;
+        if(numZero == 0 || numOne == 0){
+            cout << t << endl;
+        }else if(numOne == numZero && t.length() == 2){
+            cout << t << endl;
+        }else{
+            for(int i=0; i<t.length(); i++){
+                if(t[i] == '1' && t[i+1] == '1'){
+                    cout << t[i] << zer;
+                }else if(t[i] == '0' && t[i+1] == '0') { 
+                    cout << t[i] << one; 
+                }
+                else{
+                    cout << t[i];
+                }
+            }
+            cout <<endl;
+        }
+        
     }
 return 0;
 }

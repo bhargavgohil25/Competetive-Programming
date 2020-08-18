@@ -56,12 +56,10 @@ int main(){
     ll test;
     cin >> test;
     while(test--){
-        ll n;
-        cin >> n;
-        rep(i,0,n){
-            cout << i+1 << ' ';
-        }
-        cout << endl;
+        ll a,b;
+        cin >> a >> b;
+        ll side = min(max(2*a,b),max(2*b,a));
+        cout << side * side << endl;
     }
 return 0;
 }

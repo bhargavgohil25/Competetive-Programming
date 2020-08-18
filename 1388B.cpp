@@ -58,10 +58,21 @@ int main(){
     while(test--){
         ll n;
         cin >> n;
-        rep(i,0,n){
-            cout << i+1 << ' ';
+        string s;
+        if(n == 1){
+            cout << 8 << endl;
+        }else if(n == 3){
+            cout << 998 << endl;
+        }else{
+            for(int i=0;i<n-(((n+3)/4));i++){
+                cout << 9;
+            }
+            for(int i=0;i<(((n+3)/4));i++){
+                cout << 8;
+            }
+            cout <<endl;
         }
-        cout << endl;
+        
     }
 return 0;
 }

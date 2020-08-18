@@ -58,10 +58,15 @@ int main(){
     while(test--){
         ll n;
         cin >> n;
+        vi v(n);
         rep(i,0,n){
-            cout << i+1 << ' ';
+            cin >> v[i];
         }
-        cout << endl;
+        ll ans = 0;
+        rep(i,1,n){
+            ans += max(v[i-1] - v[i], 0);
+        }
+        cout << ans << endl;
     }
 return 0;
 }

@@ -56,12 +56,19 @@ int main(){
     ll test;
     cin >> test;
     while(test--){
+        ll count = 0;
         ll n;
         cin >> n;
-        rep(i,0,n){
-            cout << i+1 << ' ';
+        while(n >=2){
+            for(ll i=0;i<=INF;i++){
+                if((3*i*i + i)/2 > n){
+                    n = n - (3*(i-1)*(i-1) + (i-1))/2;
+                    count++;
+                    break;
+                }
+            }
         }
-        cout << endl;
+        cout << count << endl;
     }
 return 0;
 }

@@ -58,10 +58,18 @@ int main(){
     while(test--){
         ll n;
         cin >> n;
+        vi a(n);
         rep(i,0,n){
-            cout << i+1 << ' ';
+            cin >> a[i];
         }
-        cout << endl;
+        int i = n-1;
+        while(a[i] <= a[i-1] && i > 0){
+            i--;
+        }
+        while(a[i] >= a[i-1] && i > 0){
+            i--;
+        }
+        cout << i << endl;
     }
 return 0;
 }

@@ -56,12 +56,15 @@ int main(){
     ll test;
     cin >> test;
     while(test--){
-        ll n;
-        cin >> n;
-        rep(i,0,n){
-            cout << i+1 << ' ';
+        ll a[3];
+        cin >> a[0] >> a[1] >> a[2];
+        sort(a,a+3);
+        if(a[1]!=a[2]){
+            cout << "NO" << endl;
+        }else{
+            
+            cout << "YES\n" << a[0] <<' '<< a[0] <<' '<<' '<<a[2] << endl;
         }
-        cout << endl;
     }
 return 0;
 }

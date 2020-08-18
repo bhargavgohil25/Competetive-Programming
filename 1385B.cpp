@@ -58,10 +58,31 @@ int main(){
     while(test--){
         ll n;
         cin >> n;
-        rep(i,0,n){
-            cout << i+1 << ' ';
+        umap_ii map;
+        vi v(2*n);
+        rep(i,0,2*n){
+            cin >> v[i];
+            map[v[i]] = 1;
+        }
+        vi ans(n);
+        rep(i,0,2*n){
+            if(map[v[i]]){
+                ans.pb(v[i]);
+                map[v[i]] = 0;
+            }
+        }
+        for(int i=0;i<ans.size();i++){
+            if(ans[i] != 0){
+                cout << ans[i] << ' ';
+            }
         }
         cout << endl;
+
+        // for(auto i : ans){
+        //     cout << i << ' ';
+        // }
+        // cout << endl;
+
     }
 return 0;
 }

@@ -58,10 +58,33 @@ int main(){
     while(test--){
         ll n;
         cin >> n;
+        vl v(n);
         rep(i,0,n){
-            cout << i+1 << ' ';
+            cin >> v[i];
         }
-        cout << endl;
+        sort(all(v));
+        bool flag;
+        // for(int i=1;i<=n;i++){
+        //     if(v[i] - v[i-1] != 0){
+        //         flag = true;
+        //         break;
+        //     }
+        // }
+        // if(flag){
+        //     cout << 1 << endl;
+        // }else{
+        //     cout << v.size() << endl;
+        // }
+        if(v[0] == v[n-1]){
+            flag = true;
+        }else{
+            flag = false;
+        }
+        if(flag == true){
+            cout << n << endl;
+        }else{
+            cout << 1 << endl;
+        }
     }
 return 0;
 }
