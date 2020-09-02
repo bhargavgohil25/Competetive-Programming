@@ -50,44 +50,6 @@ bool isPowerOfTwo(ll x){
 
 //===============================================================================//
 
-
-// This question is pretty basic but the problem was in the overflow value 
-// the constraints for this problem were very large and the logic was to check if the 
-// c^power >= 1e15 (or anything greater), because it cant get to that value 
-// for eg. if c = 100, then it should go till 100^100 which is not feasible 
-
-
-
-
-void solve(){
-    ll n;
-    cin >> n;
-    vl a(n);
-    rep(i,0,n) cin >> a[i];
-    ll big = (ll)1e15;
-    ll ans = big;
-    sort(all(a));
-
-    ll c = 1; 
-    while(1){
-        ll poe = 1,val = 0;
-        for(ll i=0;i<n;i++,poe*=c){
-            if(poe >= (ll)big){
-                val=-1;
-                break;
-            }
-            val += (abs)(poe-a[i]);
-
-        }
-        if(val == -1){
-            break;
-        }
-        ans = min(ans,val);
-        c++;
-    }
-    cout << ans << endl;
-}
-
 int main(){
     fastIO;
 
@@ -99,7 +61,27 @@ int main(){
     ll test = 1;
     //cin >> test;
     while(test--){
-        solve();
+        ll n;
+        cin >> n;
+        vi x(n),y(n),z(n);
+        rep(i,0,n){
+            ll a,b,c;
+            cin >> a >> b >> c;
+            x[i] = a;
+            y[i] = b;
+            z[i] = c;
+        }
+        ll sum_x = 0, sum_y = 0, sum_z = 0;
+        rep(i,0,n){
+            sum_x += x[i];
+            sum_y += y[i];
+            sum_z += z[i];
+        }
+        if(sum_x == 0 && sum_y == 0 && sum_z == 0){
+            cout << "YES";
+        }else{
+            cout << "NO";
+        }
     }
 return 0;
 }

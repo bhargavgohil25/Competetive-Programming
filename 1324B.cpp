@@ -7,6 +7,8 @@ using namespace std;
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define deb(x) cout << #x << "=" << x << endl
+#define deb2(x,y) cout << #x << "=" << x << "," << #y << "=" << y << endl
 #define all(x) x.begin(), x.end()
 #define endl "\n"
 #define ff first
@@ -37,6 +39,7 @@ typedef map<int, int> mii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
+mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
 
 //===============================================================================//
@@ -50,56 +53,39 @@ bool isPowerOfTwo(ll x){
 
 //===============================================================================//
 
-
-// This question is pretty basic but the problem was in the overflow value 
-// the constraints for this problem were very large and the logic was to check if the 
-// c^power >= 1e15 (or anything greater), because it cant get to that value 
-// for eg. if c = 100, then it should go till 100^100 which is not feasible 
-
-
-
-
-void solve(){
-    ll n;
-    cin >> n;
-    vl a(n);
-    rep(i,0,n) cin >> a[i];
-    ll big = (ll)1e15;
-    ll ans = big;
-    sort(all(a));
-
-    ll c = 1; 
-    while(1){
-        ll poe = 1,val = 0;
-        for(ll i=0;i<n;i++,poe*=c){
-            if(poe >= (ll)big){
-                val=-1;
-                break;
-            }
-            val += (abs)(poe-a[i]);
-
-        }
-        if(val == -1){
-            break;
-        }
-        ans = min(ans,val);
-        c++;
-    }
-    cout << ans << endl;
-}
-
 int main(){
     fastIO;
+    srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test = 1;
-    //cin >> test;
+    ll test;
+    cin >> test;
     while(test--){
-        solve();
-    }
+        ll n;
+        cin >> n;
+        vi s(n);
+        rep(i,0,n) cin >> s[i];
+        // string s = "";
+
+        // for(int i : a){
+        //     s.pb(i + '0');
+        // }
+        //cout << s << endl;
+        bool flag = false;
+        for(int i=1;i<s.size();i++){
+            for(int j=i+1;j<s.size();j++){
+                if(s[j] == s[i-1]){
+                    flag = true;
+                }
+            }
+        }
+        if(flag) cout << "YES" << endl;
+        else cout << "NO" << endl;
+        
+    }   
 return 0;
 }

@@ -50,44 +50,6 @@ bool isPowerOfTwo(ll x){
 
 //===============================================================================//
 
-
-// This question is pretty basic but the problem was in the overflow value 
-// the constraints for this problem were very large and the logic was to check if the 
-// c^power >= 1e15 (or anything greater), because it cant get to that value 
-// for eg. if c = 100, then it should go till 100^100 which is not feasible 
-
-
-
-
-void solve(){
-    ll n;
-    cin >> n;
-    vl a(n);
-    rep(i,0,n) cin >> a[i];
-    ll big = (ll)1e15;
-    ll ans = big;
-    sort(all(a));
-
-    ll c = 1; 
-    while(1){
-        ll poe = 1,val = 0;
-        for(ll i=0;i<n;i++,poe*=c){
-            if(poe >= (ll)big){
-                val=-1;
-                break;
-            }
-            val += (abs)(poe-a[i]);
-
-        }
-        if(val == -1){
-            break;
-        }
-        ans = min(ans,val);
-        c++;
-    }
-    cout << ans << endl;
-}
-
 int main(){
     fastIO;
 
@@ -96,10 +58,34 @@ int main(){
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test = 1;
+    ll test=1;
     //cin >> test;
     while(test--){
-        solve();
+        ll n;
+        cin >> n;
+        vi a(n);
+        rep(i,0,n) cin >> a[i];
+        if(n == 1){
+            cout << 1 << ' ' << 1 << endl;
+            cout << -a[0] <<endl;
+            cout<<"1 1\n0\n1 1\n0\n";
+        }else{
+            cout << 1 << ' ' << 1 << endl;
+            cout << -a[0] << endl;
+            cout << 2 << ' ' << n << endl;
+            rep(i,1,n){
+                cout << a[i] * (n-1) << ' ';
+                a[i] += a[i] * (n-1);
+            }
+            cout << endl;
+            cout << 1 << ' ' << n << endl;
+            cout << 0 << ' ';
+            rep(i,1,n){
+                cout << -a[i] << ' ';
+            }
+            cout << endl;
+
+        }
     }
 return 0;
 }

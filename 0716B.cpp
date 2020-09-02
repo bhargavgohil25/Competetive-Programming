@@ -50,43 +50,22 @@ bool isPowerOfTwo(ll x){
 
 //===============================================================================//
 
+bool freq(string s){
+    unordered_map<char,int>m;
 
-// This question is pretty basic but the problem was in the overflow value 
-// the constraints for this problem were very large and the logic was to check if the 
-// c^power >= 1e15 (or anything greater), because it cant get to that value 
-// for eg. if c = 100, then it should go till 100^100 which is not feasible 
-
-
-
-
-void solve(){
-    ll n;
-    cin >> n;
-    vl a(n);
-    rep(i,0,n) cin >> a[i];
-    ll big = (ll)1e15;
-    ll ans = big;
-    sort(all(a));
-
-    ll c = 1; 
-    while(1){
-        ll poe = 1,val = 0;
-        for(ll i=0;i<n;i++,poe*=c){
-            if(poe >= (ll)big){
-                val=-1;
-                break;
-            }
-            val += (abs)(poe-a[i]);
-
+    for(int i=0;i<s.length();i++){
+        if(s[i] != '?'){
+            m[s[i]]++;
         }
-        if(val == -1){
-            break;
-        }
-        ans = min(ans,val);
-        c++;
     }
-    cout << ans << endl;
+    for(auto i : m){
+        if(i.ss > 1){
+            return false;
+        }
+    }
+    return true;
 }
+
 
 int main(){
     fastIO;
@@ -96,10 +75,16 @@ int main(){
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test = 1;
-    //cin >> test;
+    ll test;
+    cin >> test;
     while(test--){
-        solve();
+        string s;
+        cin >> s;
+        if(s.length() < 26 || freq(s) == false){
+            cout << -1 << endl;
+            return 0;
+        }
+
     }
 return 0;
 }

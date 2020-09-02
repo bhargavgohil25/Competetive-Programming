@@ -3,7 +3,7 @@
 using namespace std;
 
 #define rep(i,a,b) for(int i=a; i<b; i++)
-#define repe(i,a,b) for(int i=a; i<=b; i++)
+#define repe(i,a,b) for(ll i=a; i<=b; i++)
 #define ll long long
 #define ui unsigned int
 #define pb push_back
@@ -14,6 +14,7 @@ using namespace std;
 #define lb lower_bound
 #define ub upper_bound
 #define INF (int)1e9
+#define INFE 1000000000000000000
 #define PI 3.1415926535897932384626433832795
 #define MOD 1000000007
 
@@ -50,44 +51,6 @@ bool isPowerOfTwo(ll x){
 
 //===============================================================================//
 
-
-// This question is pretty basic but the problem was in the overflow value 
-// the constraints for this problem were very large and the logic was to check if the 
-// c^power >= 1e15 (or anything greater), because it cant get to that value 
-// for eg. if c = 100, then it should go till 100^100 which is not feasible 
-
-
-
-
-void solve(){
-    ll n;
-    cin >> n;
-    vl a(n);
-    rep(i,0,n) cin >> a[i];
-    ll big = (ll)1e15;
-    ll ans = big;
-    sort(all(a));
-
-    ll c = 1; 
-    while(1){
-        ll poe = 1,val = 0;
-        for(ll i=0;i<n;i++,poe*=c){
-            if(poe >= (ll)big){
-                val=-1;
-                break;
-            }
-            val += (abs)(poe-a[i]);
-
-        }
-        if(val == -1){
-            break;
-        }
-        ans = min(ans,val);
-        c++;
-    }
-    cout << ans << endl;
-}
-
 int main(){
     fastIO;
 
@@ -99,7 +62,22 @@ int main(){
     ll test = 1;
     //cin >> test;
     while(test--){
-        solve();
+        ll n,k;
+        cin >> n >> k;
+        ll type,num;
+        ll mini = INFE;
+        repe(i,1,k){
+            ll a;
+            cin >> a;
+            ll x = n/a;
+            ll temp = n%a;
+            if(temp < mini){
+                mini = temp;
+                type = i;
+                num = x;
+            }
+        }
+        cout << type <<' '<< num << endl;
     }
 return 0;
 }

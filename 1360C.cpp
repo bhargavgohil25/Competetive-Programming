@@ -50,43 +50,44 @@ bool isPowerOfTwo(ll x){
 
 //===============================================================================//
 
-
-// This question is pretty basic but the problem was in the overflow value 
-// the constraints for this problem were very large and the logic was to check if the 
-// c^power >= 1e15 (or anything greater), because it cant get to that value 
-// for eg. if c = 100, then it should go till 100^100 which is not feasible 
-
-
-
-
 void solve(){
-    ll n;
-    cin >> n;
-    vl a(n);
-    rep(i,0,n) cin >> a[i];
-    ll big = (ll)1e15;
-    ll ans = big;
-    sort(all(a));
-
-    ll c = 1; 
-    while(1){
-        ll poe = 1,val = 0;
-        for(ll i=0;i<n;i++,poe*=c){
-            if(poe >= (ll)big){
-                val=-1;
-                break;
+        ll n;
+        cin >> n;
+        vi a(n);
+        ll even = 0, odd = 0;
+        rep(i,0,n){
+            cin >> a[i];
+            if(a[i]%2 == 0) even++;
+            else odd++;
+        }
+        // sort(all(even));
+        // sort(all(odd));
+        
+        if(even%2 != odd%2){
+            cout << "NO" << endl;
+        }else {
+            if(even%2 == 0){
+                cout << "YES" << endl;
+            }else{
+                for(int i=0;i<n;i++){
+                    for(int j=i+1;j<n;j++){
+                        if(a[i]%2 != a[j]%2 && abs(a[i] - a[j]) == 1){
+                            cout << "YES" << endl;
+                            return;
+                        }
+                    }
+                }
+                cout << "NO" << endl;
             }
-            val += (abs)(poe-a[i]);
-
         }
-        if(val == -1){
-            break;
-        }
-        ans = min(ans,val);
-        c++;
-    }
-    cout << ans << endl;
+        
+        // if(flag){
+        //     cout << "YES" << endl;
+        // }else{
+        //     cout << "NO" << endl;
+        // }
 }
+
 
 int main(){
     fastIO;
@@ -96,10 +97,11 @@ int main(){
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test = 1;
-    //cin >> test;
+    ll test;
+    cin >> test;
     while(test--){
         solve();
+        
     }
 return 0;
 }
