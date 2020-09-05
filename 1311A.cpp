@@ -53,6 +53,27 @@ bool isPowerOfTwo(ll x){
 
 //===============================================================================//
 
+
+void solve(){
+    ll a,b;
+    cin >> a >> b;
+    if(a < b){  
+        if((b-a)%2 == 1){
+            cout << 1 << endl;
+        }else{
+            cout << 2 << endl;
+        }
+    }else if(b < a){
+        if((a-b)%2 == 1){
+            cout << 2 << endl;
+        }else{
+            cout << 1 << endl;
+        }
+    }else{
+        cout << 0 << endl;
+    }
+}
+
 int main(){
     fastIO;
 srand(chrono::high_resolution_clock::now().time_since_epoch().count());
@@ -65,21 +86,7 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test;
     cin >> test;
     while(test--){
-        string s;
-        cin >> s;
-        vl position; // store the 1-based indexes of the "R" positions
-        position.pb(0);
-        rep(i,0,s.length()){
-            if(s[i] == 'R'){
-                position.pb(i+1);
-            }
-        }
-        position.pb(s.size()+1); // just add the last point because we have to consider that as well
-        ll ans = INT_MIN;
-        rep(i,0,position.size()-1){
-            ans = max(ans,(position[i+1]-position[i]));
-        }
-        cout << ans << endl;
+        solve();
     }
 return 0;
 }

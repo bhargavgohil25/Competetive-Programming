@@ -53,6 +53,36 @@ bool isPowerOfTwo(ll x){
 
 //===============================================================================//
 
+
+void solve(){
+    ll n,m;
+    cin >> n >> m;
+    vi a(n),p(m);
+    rep(i,0,n) cin >> a[i];
+    //rep(i,0,n) b[i] = a[i];
+    rep(i,0,m) cin >> p[i];
+    sort(all(p));
+    //sort(all(b));
+    set<int> s;
+    rep(i,0,m) s.insert(p[i]);
+
+    rep(i,0,n-1){
+        if(find(all(p),i+1) != p.end()){
+            if(a[i] > a[i+1]){
+                swap(a[i],a[i+1]);
+                i=-1;
+            }
+        }
+    }
+    rep(i,1,n){
+        if(a[i] < a[i-1]){
+            cout << "NO" << endl;
+            return;
+        }
+    }
+    cout << "YES" << endl;
+}
+
 int main(){
     fastIO;
 srand(chrono::high_resolution_clock::now().time_since_epoch().count());
@@ -65,21 +95,7 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test;
     cin >> test;
     while(test--){
-        string s;
-        cin >> s;
-        vl position; // store the 1-based indexes of the "R" positions
-        position.pb(0);
-        rep(i,0,s.length()){
-            if(s[i] == 'R'){
-                position.pb(i+1);
-            }
-        }
-        position.pb(s.size()+1); // just add the last point because we have to consider that as well
-        ll ans = INT_MIN;
-        rep(i,0,position.size()-1){
-            ans = max(ans,(position[i+1]-position[i]));
-        }
-        cout << ans << endl;
+        solve();
     }
 return 0;
 }

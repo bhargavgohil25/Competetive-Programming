@@ -51,7 +51,15 @@ bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
 
+bool isPowerOfFour(ll n){
+    int cnt=0; if(n&&!(n&(n-1))) { while(n>1) { n>>=1; cnt++;} return (cnt%2==0)?1:0; }
+}
 //===============================================================================//
+
+void solve(){
+
+}
+
 
 int main(){
     fastIO;
@@ -65,21 +73,7 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test;
     cin >> test;
     while(test--){
-        string s;
-        cin >> s;
-        vl position; // store the 1-based indexes of the "R" positions
-        position.pb(0);
-        rep(i,0,s.length()){
-            if(s[i] == 'R'){
-                position.pb(i+1);
-            }
-        }
-        position.pb(s.size()+1); // just add the last point because we have to consider that as well
-        ll ans = INT_MIN;
-        rep(i,0,position.size()-1){
-            ans = max(ans,(position[i+1]-position[i]));
-        }
-        cout << ans << endl;
+        solve();
     }
 return 0;
 }

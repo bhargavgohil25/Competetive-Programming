@@ -51,6 +51,7 @@ bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
 
+
 //===============================================================================//
 
 int main(){
@@ -65,21 +66,17 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test;
     cin >> test;
     while(test--){
-        string s;
-        cin >> s;
-        vl position; // store the 1-based indexes of the "R" positions
-        position.pb(0);
-        rep(i,0,s.length()){
-            if(s[i] == 'R'){
-                position.pb(i+1);
-            }
+        ll a,b;
+        cin >> a >> b ;
+        ll x = abs(a-b);
+        ll cnt = 0;
+        if(a==b){
+            cout << 0 << endl;
+        }else if(x%10 != 0){
+            cout << (x/10)+1 << endl;
+        }else{
+            cout << (x/10) << endl;
         }
-        position.pb(s.size()+1); // just add the last point because we have to consider that as well
-        ll ans = INT_MIN;
-        rep(i,0,position.size()-1){
-            ans = max(ans,(position[i+1]-position[i]));
-        }
-        cout << ans << endl;
     }
 return 0;
 }

@@ -51,6 +51,7 @@ bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
 
+
 //===============================================================================//
 
 int main(){
@@ -65,21 +66,53 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test;
     cin >> test;
     while(test--){
-        string s;
-        cin >> s;
-        vl position; // store the 1-based indexes of the "R" positions
-        position.pb(0);
-        rep(i,0,s.length()){
-            if(s[i] == 'R'){
-                position.pb(i+1);
+        ll n,x,y;
+        cin >> n >> x >> y;
+
+        ll diff = y-x;
+        ll tem = (n-2)+1;
+        ll number,div;
+        vi q;
+        for(int t=tem;t>0;t--){
+            if(diff%t == 0){
+                number = t-1;
+                div = diff/t;
+                break;
             }
         }
-        position.pb(s.size()+1); // just add the last point because we have to consider that as well
-        ll ans = INT_MIN;
-        rep(i,0,position.size()-1){
-            ans = max(ans,(position[i+1]-position[i]));
+        bool flag = false;
+        if(number+2 == n){
+            q.pb(x);
+            for(int i=1;i<=n-1;i++){
+                q.pb(x+i*div);
+            }
+            flag = true;
+        }else{
+            q.pb(x);
+            for(int i=1;i<number+2;i++){
+                q.pb(x+i*div);
+            }
+            if(x > div && q.size()!= n){
+                while(x>0){
+                    q.pb(x-div);
+                    x = x-div;
+                    if(q.size() == n){
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+            if(flag == false && q.size() != n){
+                //q.pb(y);
+                for(int i=1;i<=n-(number+2);i++){
+                    q.pb(y+i*div);
+                }
+            }
         }
-        cout << ans << endl;
+        for(auto i : q){
+            cout << i << ' ';
+        }
+        cout << endl;
     }
 return 0;
 }
