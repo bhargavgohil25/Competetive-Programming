@@ -104,9 +104,19 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
             }
             if(flag == false && q.size() != n){
                 //q.pb(y);
-                for(int i=1;i<=n-(number+2);i++){
-                    q.pb(y+i*div);
+                while(q.size() <= n){
+                    q.pb(y+div);
+                    y = y+div;
+                    if(q.size() == n){
+                        break;
+                        flag = true;
+                    }
                 }
+
+
+                // for(int i=1;i<=n-(number+2);i++){
+                //     q.pb(y+i*div);
+                // }
             }
         }
         for(auto i : q){
