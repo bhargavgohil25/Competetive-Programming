@@ -7,6 +7,8 @@ using namespace std;
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define deb(x) cout << #x << '=' << x << endl
+#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define endl "\n"
 #define ff first
@@ -37,6 +39,7 @@ typedef map<int, int> mii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
+mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
 
 //===============================================================================//
@@ -52,36 +55,49 @@ bool isPowerOfTwo(ll x){
 
 int main(){
     fastIO;
+srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
-    cin >> test;
+    ll test = 1;
+    //cin >> test;
     while(test--){
-        ll n;
-        cin >> n;
-        string s;
-        cin >> s;
-        string a = "1";
-        string b = "1";
-        // a.pb(1);
-        // b.pb(1);
-        for(int i=1;i<n;i++){
-            if(s[i] == '0'){
-                a += '0';
-                b += '0';
-            }else if(s[i] == '1'){
-                break;
-            }else{
-                a += '2';
-                b += '0';
-            }
-        }
-
-        cout << a <<endl << b << endl;
+        	int n, k;
+	cin >> n >> k;
+	queue<int> d;	
+	set<int> s;
+	while(n--){
+		ll x;
+		cin >> x;
+		if(s.find(x)!=s.end()){
+			continue;
+		}
+		if(d.size()!=k){
+			s.insert(x);
+			d.push(x);
+		}	
+		else{
+			s.erase(s.find(d.front()));
+			d.pop();
+			s.insert(x);
+			d.push(x);
+		}
+	}
+	vl v;
+	while(d.size()>0){
+		v.pb(d.front());
+		d.pop();
+	}
+	reverse(all(v));
+	cout << v.size() << endl;
+	for(auto i : v){
+		cout << i << ' ';
+	}
+	cout << endl;
+ 
     }
 return 0;
 }

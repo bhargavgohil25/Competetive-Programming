@@ -4,9 +4,12 @@ using namespace std;
 
 #define rep(i,a,b) for(int i=a; i<b; i++)
 #define repe(i,a,b) for(int i=a; i<=b; i++)
+#define read(n) rep(i,0,n) cin >> a[i]
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define deb(x) cout << #x << '=' << x << endl
+#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define endl "\n"
 #define ff first
@@ -37,6 +40,7 @@ typedef map<int, int> mii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
+mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
 
 //===============================================================================//
@@ -49,39 +53,47 @@ bool isPowerOfTwo(ll x){
 }
 
 //===============================================================================//
+ll kpos[200001];
 
 int main(){
     fastIO;
+srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
+    ll test = 1;
     cin >> test;
     while(test--){
-        ll n;
-        cin >> n;
-        string s;
-        cin >> s;
-        string a = "1";
-        string b = "1";
-        // a.pb(1);
-        // b.pb(1);
-        for(int i=1;i<n;i++){
-            if(s[i] == '0'){
-                a += '0';
-                b += '0';
-            }else if(s[i] == '1'){
-                break;
-            }else{
-                a += '2';
-                b += '0';
+        ll n,k;
+        cin >> n >> k;
+        vi a(n);
+        //vi kpos(n,0);
+        memset(kpos, 0, k*sizeof(kpos[0]));
+        ll odd_count = 0;
+        rep(i,0,n) {
+            cin >> a[i];
+            if(a[i]%2 == 1){
+                if(odd_count <= k) {
+                    kpos[odd_count] = i+1;
+                }
+                odd_count++;
             }
         }
-
-        cout << a <<endl << b << endl;
+        //for(auto i : kpos) cout << i << ' ';
+        if(odd_count < k){
+            cout << "NO" << endl;
+        }else if((odd_count-k+1)%2 == 0){
+            cout << "NO" << endl;
+        }else{
+            cout << "YES" << endl;
+            rep(i,0,k-1){
+                cout << kpos[i] << ' ';
+            }
+            cout << n << endl;
+        }
     }
 return 0;
 }

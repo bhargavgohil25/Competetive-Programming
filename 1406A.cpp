@@ -7,6 +7,8 @@ using namespace std;
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define deb(x) cout << #x << '=' << x << endl
+#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define endl "\n"
 #define ff first
@@ -16,7 +18,7 @@ using namespace std;
 #define INF (int)1e9
 #define PI 3.1415926535897932384626433832795
 #define MOD 1000000007
-
+#define read(n) rep(i,0,n) cin >> a[i]
 #define hcf(x,y)     __gcd(x,y)
 #define lcm(x,y)     (x*y)/(__gcd(x,y))
 #define CountOne(x)  __builtin_popcount(x)        
@@ -37,6 +39,7 @@ typedef map<int, int> mii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
+mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
 
 //===============================================================================//
@@ -50,38 +53,82 @@ bool isPowerOfTwo(ll x){
 
 //===============================================================================//
 
+
+
+
+
+
+void swap(int* a, int* b) 
+{ 
+    int temp; 
+    temp = *a; 
+    *a = *b; 
+    *b = temp; 
+} 
+int segregate(int arr[], int size) 
+{ 
+    int j = 0, i; 
+    for (i = 0; i < size; i++) { 
+        if (arr[i] <= 0) { 
+            swap(&arr[i], &arr[j]); 
+            j++; 
+        } 
+    } 
+  
+    return j; 
+}
+int findMissingPositive(int arr[], int size) 
+{ 
+    int i; 
+    for (i = 0; i < size; i++) { 
+        if (abs(arr[i]) - 1 < size && arr[abs(arr[i]) - 1] > 0) 
+            arr[abs(arr[i]) - 1] = -arr[abs(arr[i]) - 1]; 
+    } 
+    for (i = 0; i < size; i++) 
+        if (arr[i] > 0) 
+            
+            return i + 1; 
+  
+    return size + 1; 
+} 
+int findMissing(int arr[], int size) 
+{ 
+    int shift = segregate(arr, size); 
+    return findMissingPositive(arr + shift, size - shift); 
+} 
+
+
+
+
+
 int main(){
     fastIO;
+srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
+    ll test = 1;
     cin >> test;
     while(test--){
         ll n;
         cin >> n;
-        string s;
-        cin >> s;
-        string a = "1";
-        string b = "1";
-        // a.pb(1);
-        // b.pb(1);
-        for(int i=1;i<n;i++){
-            if(s[i] == '0'){
-                a += '0';
-                b += '0';
-            }else if(s[i] == '1'){
-                break;
-            }else{
-                a += '2';
-                b += '0';
-            }
+        vi a(n);
+        rep(i,0,n) cin >> a[i];
+        sort(all(a));
+        umap_ii map;
+        rep(i,0,n) map[a[i]]++;
+        ll count = 0;
+        while(map.find(count) != map.end()){
+            count = count + 1;
         }
-
-        cout << a <<endl << b << endl;
+        int corner = 0;
+        while(map.find(corner) != map.end() && map.find(corner)->ss >= 2){
+            corner++;
+        }
+        cout << corner + count << endl;
     }
 return 0;
 }

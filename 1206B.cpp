@@ -7,6 +7,8 @@ using namespace std;
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define deb(x) cout << #x << '=' << x << endl
+#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define endl "\n"
 #define ff first
@@ -37,6 +39,7 @@ typedef map<int, int> mii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
+mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
 
 //===============================================================================//
@@ -47,41 +50,54 @@ ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
+bool isPowerOfFour(ll x){
+  ll cnt=0; if(x&&!(x&(x-1)))  while(x>1) { x>>=1; cnt++;} return (cnt%2==0)?1:0; 
+}
+
 
 //===============================================================================//
 
 int main(){
     fastIO;
+srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
-    cin >> test;
+    ll test = 1;
+    //cin >> test;
     while(test--){
         ll n;
         cin >> n;
-        string s;
-        cin >> s;
-        string a = "1";
-        string b = "1";
-        // a.pb(1);
-        // b.pb(1);
-        for(int i=1;i<n;i++){
-            if(s[i] == '0'){
-                a += '0';
-                b += '0';
-            }else if(s[i] == '1'){
-                break;
-            }else{
-                a += '2';
-                b += '0';
-            }
-        }
+        vi a(n);
+        ll cnt = 0;
+        ll zero = 0, neg = 0, pos = 0;
 
-        cout << a <<endl << b << endl;
+        rep(i,0,n){
+            cin >> a[i];
+            if(a[i] == 0){
+                zero++;
+                cnt++;
+                continue;
+            }
+            if(a[i] < 0){
+                cnt += abs(a[i] + 1);
+                neg++;
+                continue;
+            }
+            if(a[i] > 0){
+                pos++;
+                cnt += a[i] - 1;
+                continue;
+            }
+            
+        }
+        if(neg%2 != 0 && zero == 0){
+            cnt += 2;        
+        }
+        cout << cnt << endl;
     }
 return 0;
 }

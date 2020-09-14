@@ -7,6 +7,8 @@ using namespace std;
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define deb(x) cout << #x << '=' << x << endl
+#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define endl "\n"
 #define ff first
@@ -37,6 +39,7 @@ typedef map<int, int> mii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
+mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
 
 //===============================================================================//
@@ -52,36 +55,41 @@ bool isPowerOfTwo(ll x){
 
 int main(){
     fastIO;
+srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
-    cin >> test;
+    ll test = 1;
+    //cin >> test;
     while(test--){
         ll n;
         cin >> n;
-        string s;
-        cin >> s;
-        string a = "1";
-        string b = "1";
-        // a.pb(1);
-        // b.pb(1);
-        for(int i=1;i<n;i++){
-            if(s[i] == '0'){
-                a += '0';
-                b += '0';
-            }else if(s[i] == '1'){
-                break;
-            }else{
-                a += '2';
-                b += '0';
+        vl a(n);
+        set <int> s;
+        rep(i,0,n) cin >> a[i];
+        ll maxi = *max_element(all(a));
+        ll mini = *min_element(all(a));
+        ll count = 0;
+        rep(i,0,n){
+            if(a[i] < maxi && a[i] > mini){
+                ++count;
             }
         }
+        cout << count << endl;
+        // if(s.size() <= 2){
+        //     cout << 0 << endl;
+        // }else{
+        //     cout << s.size() - 2 << endl;
+        // }
+        // if(n <= 2){
+        //     cout << 0 << endl;
+        // }else{
+        //     sort(all(a));
 
-        cout << a <<endl << b << endl;
+        // }
     }
 return 0;
 }

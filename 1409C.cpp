@@ -89,7 +89,8 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
             flag = true;
         }else{
             q.pb(x);
-            for(int i=1;i<number+2;i++){
+            q.pb(y);
+            for(int i=1;i<number+2-1;i++){
                 q.pb(x+i*div);
             }
             if(x > div && q.size()!= n){
@@ -108,8 +109,8 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
                     q.pb(y+div);
                     y = y+div;
                     if(q.size() == n){
-                        break;
                         flag = true;
+                        break;
                     }
                 }
 

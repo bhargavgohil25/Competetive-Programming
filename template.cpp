@@ -50,11 +50,7 @@ ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
-
-bool isPowerOfFour(ll n){
-    int cnt=0; if(n&&!(n&(n-1))) { while(n>1) { n>>=1; cnt++;} return (cnt%2==0)?1:0; }
-}
-
+ll ceil(ll a,ll b){ return (a+b-1)/b; }
 //===============================================================================//
 
 

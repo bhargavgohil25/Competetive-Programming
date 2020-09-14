@@ -7,6 +7,8 @@ using namespace std;
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define deb(x) cout << #x << '=' << x << endl
+#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define endl "\n"
 #define ff first
@@ -23,7 +25,7 @@ using namespace std;
 #define parity(x)    __builtin_parity(x)           //Funtion return (true) if number of set bits is odd(odd parity) else false..
 #define LeadZero(x)  __builtin_clz(x)             //Counts leading zero in binary representation of x ....   
 #define TrailZero(x) __builtin_ctz(x)
-
+#define read(n) rep(i,0,n) cin >> a[i]
 #define fastIO ios::sync_with_stdio(0); cin.tie(0); cout.tie(0)
 
 typedef vector<int> vi;
@@ -37,6 +39,7 @@ typedef map<int, int> mii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
+mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
 
 //===============================================================================//
@@ -52,36 +55,35 @@ bool isPowerOfTwo(ll x){
 
 int main(){
     fastIO;
+srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
+    ll test = 1;
     cin >> test;
     while(test--){
         ll n;
         cin >> n;
-        string s;
-        cin >> s;
-        string a = "1";
-        string b = "1";
-        // a.pb(1);
-        // b.pb(1);
-        for(int i=1;i<n;i++){
-            if(s[i] == '0'){
-                a += '0';
-                b += '0';
-            }else if(s[i] == '1'){
-                break;
-            }else{
-                a += '2';
-                b += '0';
-            }
+        vl a(n);
+        rep(i,0,n) cin >> a[i];
+        sort(all(a));
+        ll maxi = -1e18;
+        // ALGORITHM for 5 Element window 
+        // Finding the maximum product of 5 elements
+        rep(i,0,5){
+            ll aa,b,c,d,e;
+            e = (n-1+i)%n;
+            d = (n-2+i)%n;
+            c = (n-3+i)%n;
+            b = (n-4+i)%n;
+            aa = (n-5+i)%n;
+            ll product = a[aa]*a[b]*a[c]*a[d]*a[e];
+            maxi = max(maxi,product);
         }
-
-        cout << a <<endl << b << endl;
+        cout << maxi << endl;
     }
 return 0;
 }

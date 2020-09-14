@@ -7,6 +7,8 @@ using namespace std;
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define deb(x) cout << #x << '=' << x << endl
+#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define endl "\n"
 #define ff first
@@ -37,6 +39,7 @@ typedef map<int, int> mii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
+mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
 
 //===============================================================================//
@@ -52,36 +55,35 @@ bool isPowerOfTwo(ll x){
 
 int main(){
     fastIO;
+srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
-    cin >> test;
+    ll test = 1;
+    //cin >> test;
     while(test--){
-        ll n;
-        cin >> n;
-        string s;
-        cin >> s;
-        string a = "1";
-        string b = "1";
-        // a.pb(1);
-        // b.pb(1);
-        for(int i=1;i<n;i++){
-            if(s[i] == '0'){
-                a += '0';
-                b += '0';
-            }else if(s[i] == '1'){
-                break;
-            }else{
-                a += '2';
-                b += '0';
-            }
+        ll pehla_ghanta,pehla_minute,dusra_ghanta,dusra_minute;
+        char bakwass;
+        cin >> pehla_ghanta >> bakwass >> pehla_minute >>dusra_ghanta >> bakwass >> dusra_minute;
+        ll samay = pehla_ghanta*60+dusra_ghanta*60+pehla_minute+dusra_minute;
+        samay /= 2;
+        ll akhri_samay_ghanta = samay/60;
+        ll akhri_samay_minute = samay%60;
+        string akhri_samay_ghanta_string = to_string(akhri_samay_ghanta);
+        string akhri_samay_minute_string = to_string(akhri_samay_minute);
+        if(akhri_samay_ghanta_string.length() == 1){
+            akhri_samay_ghanta_string = '0'+ akhri_samay_ghanta_string;
+        }
+        if(akhri_samay_minute_string.length() == 1){
+            akhri_samay_minute_string = '0' + akhri_samay_minute_string; 
         }
 
-        cout << a <<endl << b << endl;
+        cout << akhri_samay_ghanta_string << bakwass << akhri_samay_minute_string << endl;
+
+
     }
 return 0;
 }

@@ -7,6 +7,8 @@ using namespace std;
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define deb(x) cout << #x << '=' << x << endl
+#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define endl "\n"
 #define ff first
@@ -37,6 +39,7 @@ typedef map<int, int> mii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
+mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
 
 //===============================================================================//
@@ -50,38 +53,55 @@ bool isPowerOfTwo(ll x){
 
 //===============================================================================//
 
+int gcd(ll x, ll y){
+    if(x == 0){
+        return x;
+    }
+    return gcd(y,x%y);
+}
+
 int main(){
     fastIO;
+srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
-    cin >> test;
+    int test =1;
+    cin>>test;	
     while(test--){
-        ll n;
-        cin >> n;
-        string s;
-        cin >> s;
-        string a = "1";
-        string b = "1";
-        // a.pb(1);
-        // b.pb(1);
-        for(int i=1;i<n;i++){
-            if(s[i] == '0'){
-                a += '0';
-                b += '0';
-            }else if(s[i] == '1'){
-                break;
-            }else{
-                a += '2';
-                b += '0';
-            }
-        }
-
-        cout << a <<endl << b << endl;
+		int n;
+		cin>>n;
+		int a[n];
+		rep(i,0,n){
+		cin>>a[i];
+		}	
+		sort(a, a+n);
+		vector<int>v;
+		v.pb(a[n-1]);
+		int g=a[n-1], k=0;
+		int maxi=INT_MIN;
+		a[n-1]=-1;
+		int temp=g;
+		for(int i=1;i<n;i++){
+			maxi=INT_MIN, k=0;
+			for(int j=0;j<n;j++){
+				if(a[j]!=-1){
+					if(__gcd(a[j], g)>=maxi){
+						k=j;
+						maxi=__gcd(a[j], g);
+					}
+				}
+			}
+			v.pb(a[k]);
+			g=__gcd(g, a[k]);
+			a[k]=-1;
+		}
+		rep(i,0,v.size())cout<<v[i]<<" ";
+		cout<<endl;
     }
+
 return 0;
 }

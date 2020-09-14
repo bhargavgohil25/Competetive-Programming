@@ -50,13 +50,36 @@ ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
-
-bool isPowerOfFour(ll n){
-    int cnt=0; if(n&&!(n&(n-1))) { while(n>1) { n>>=1; cnt++;} return (cnt%2==0)?1:0; }
-}
 //===============================================================================//
 
 void solve(){
+    ll n,m;
+    cin >> n >> m;
+    string s;
+    cin >> s;
+    vi a(m);
+    rep(i,0,m){
+        cin >> a[i];
+    }
+    sort(all(a));
+    //map<int,int> number;
+    ll ar[26] = {0};
+    for(int i=0;i<s.length();i++){
+        ar[s[i] - 'a']++;
+    }
+    ll ren = m-1;
+    ll cnt = 0;
+    for(int i=s.length()-1;i>=0;i--){
+        while(a[ren] > i && ren >=0){
+            cnt++;
+            ren--;
+        }
+        ar[s[i] - 'a'] += cnt;
+    }
+    for(auto i : ar){
+        cout << i <<' ';
+    }
+    cout << endl;
 
 }
 

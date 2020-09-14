@@ -44,6 +44,7 @@ ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
+ll ceil(ll a,ll b){ return (a+b-1)/b; }
 
 int main(){
     fastIO;
@@ -58,10 +59,14 @@ int main(){
     while(test--){
         int n,m,k;
         cin >> n >> m >> k;
-        if(n/k > m){
-            cout << (m)-(ceil(m-(n/k)/(k-1))) << endl;
-        }else if(n/k == m || n/k < m){
+        // if(n == k || m == 0){
+        //     cout << 0 << endl;
+        //     continue;
+        // }
+        if(m <= n/k){
             cout << m << endl;
+        }else{
+            cout << (n/k)-ceil(1.0*(m-(n/k))/(k-1)) <<endl;
         }
     }
 return 0;

@@ -7,6 +7,8 @@ using namespace std;
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define deb(x) cout << #x << '=' << x << endl
+#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define endl "\n"
 #define ff first
@@ -37,6 +39,7 @@ typedef map<int, int> mii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
+mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
 
 //===============================================================================//
@@ -52,36 +55,35 @@ bool isPowerOfTwo(ll x){
 
 int main(){
     fastIO;
+srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
-    cin >> test;
+    ll test = 1;
+    //cin >> test;
     while(test--){
-        ll n;
-        cin >> n;
-        string s;
-        cin >> s;
-        string a = "1";
-        string b = "1";
-        // a.pb(1);
-        // b.pb(1);
-        for(int i=1;i<n;i++){
-            if(s[i] == '0'){
-                a += '0';
-                b += '0';
-            }else if(s[i] == '1'){
-                break;
-            }else{
-                a += '2';
-                b += '0';
+        ll b,k;
+        cin >> b >> k;
+        vi a(k);
+        
+        rep(i,0,k) cin >> a[i];
+        if(b%2 == 0 ){
+            if(a[k-1]%2 == 0) cout << "EVEN" << endl;
+            else cout << "ODD" << endl;
+            //flag = true;
+        }else{
+            ll sum = 0;
+            rep(i,0,k){
+                if(a[i]%2 == 1) sum++;
             }
-        }
-
-        cout << a <<endl << b << endl;
+            if(sum%2) cout << "ODD" << endl;
+            else cout << "EVEN" << endl;
+        } 
+        // if(flag) cout << "EVEN" << endl;
+        // else cout << "ODD" << endl;
     }
 return 0;
 }

@@ -7,6 +7,8 @@ using namespace std;
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define deb(x) cout << #x << '=' << x << endl
+#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define endl "\n"
 #define ff first
@@ -37,6 +39,7 @@ typedef map<int, int> mii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
+mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
 
 //===============================================================================//
@@ -52,36 +55,67 @@ bool isPowerOfTwo(ll x){
 
 int main(){
     fastIO;
+srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
+    ll test = 1;
     cin >> test;
     while(test--){
         ll n;
         cin >> n;
-        string s;
-        cin >> s;
-        string a = "1";
-        string b = "1";
-        // a.pb(1);
-        // b.pb(1);
-        for(int i=1;i<n;i++){
-            if(s[i] == '0'){
-                a += '0';
-                b += '0';
-            }else if(s[i] == '1'){
-                break;
-            }else{
-                a += '2';
-                b += '0';
-            }
+        vi a(n);
+        rep(i,0,n) cin >> a[i];
+        // ll cnt = 0;
+        // for (auto i = a.begin(); i != a.end(); ++i) { 
+        //     if (*i % 3 == 0) { 
+        //         a.erase(i); 
+        //         i--; 
+        //         cnt++;
+        //     } 
+        // }
+        // // for (auto it = a.begin(); it != a.end(); ++it) 
+        // // cout << ' ' << *it; 
+        // // cout << endl;
+        // vi vis = {0};
+        // sort(all(a));
+        // ll i = 0;
+        // ll j = a.size()-1;
+        // while(j > i){
+        //     if((a[i] + a[j])%3 == 0 && vis[i] != 1 && vis[j] != 1){
+        //         vis[i] = 1;
+        //         vis[j] = 1;
+        //         cnt++;
+        //         i++;
+        //         j = a.size()-1;
+        //     }else{
+        //         j--;
+        //     }
+        // }
+        // cout << cnt << endl;
+        ll cnt[3] = {0};
+        rep(i,0,n){
+            cnt[a[i]%3]++; 
+        }
+        ll ans = cnt[0];
+        ll mini = min(cnt[1],cnt[2]);
+        ans += mini;
+        cnt[1] -= mini;
+        cnt[2] -= mini;
+
+        if(cnt[1] == 0){
+            ans += cnt[2]/3;
+            cout << ans << endl;
+        }else if(cnt[2] == 0){
+            ans += cnt[1]/3;
+            cout << ans << endl;
         }
 
-        cout << a <<endl << b << endl;
+        
+
     }
 return 0;
 }
