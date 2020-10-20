@@ -65,75 +65,13 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n;
-        cin >> n;
-        // cout << firstSide << ' ' << secondSide << ' '<< thirdSide << ' '<< fourthSide <<endl;
-        string firstLine,secondLine,thirdLine,fourthLine;
-        char first,second,third,fourth;
-         
-        if(n >= 4){
-            cin >> firstLine;
-            cin >> secondLine;
-            for(int i=0;i<n-4;i++){
-                string s;
-                cin >> s;
-            }
-            cin >> thirdLine;
-            cin >> fourthLine;
-            first = firstLine[1];
-            second = secondLine[0];
-            third = thirdLine[thirdLine.length()-1];
-            fourth = fourthLine[fourthLine.length()-2];
-        }else{
-            string fir;
-            cin >> fir;
-            first = fir[1];
-            string sec;
-            cin >> sec;
-            second = sec[0];
-            fourth = sec[2];
-            string four;
-            cin >> four;
-            third = four[1];
-        }
-        
+        string s;
+        cin >> s;
+        ll len = s.length();
+        ll c = s[0] - '0';
+        ll count = 10*(c-1) + (len*(len+1))/2;
 
-        if(first == second){
-            if(third == fourth){
-                if(first != fourth){
-                    cout << 0 << endl;
-                }
-                else{
-                    cout << "2" << endl;
-                    cout << "1 2" << endl << "2 1" << endl; 
-                }
-            }
-            else{
-                cout << "1" << endl;
-                if(first == fourth){
-                    cout << n << ' ' << n-1 << endl;
-                }else{
-                    cout << n-1 << ' ' << n << endl;
-                }
-            }
-        }else{
-            if(third == fourth){
-                cout << "1" << endl;
-                if(first == fourth){
-                    cout << "1 2" << endl;
-                }else{
-                    cout << "2 1" << endl;
-                }
-            }else{
-                if(third == second){
-                    cout << "2" << endl;
-                    cout << "1 2" << endl << n <<' ' << n-1 << endl;
-                }else{
-                    cout << "2" << endl;
-                    cout << "1 2" << endl << n <<' ' << n-1 << endl;
-                }
-            }
-        }
+        cout << count << endl;
     }
 return 0;
 }

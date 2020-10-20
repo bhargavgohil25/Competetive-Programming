@@ -67,73 +67,38 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     while(test--){
         ll n;
         cin >> n;
-        // cout << firstSide << ' ' << secondSide << ' '<< thirdSide << ' '<< fourthSide <<endl;
-        string firstLine,secondLine,thirdLine,fourthLine;
-        char first,second,third,fourth;
-         
-        if(n >= 4){
-            cin >> firstLine;
-            cin >> secondLine;
-            for(int i=0;i<n-4;i++){
-                string s;
-                cin >> s;
-            }
-            cin >> thirdLine;
-            cin >> fourthLine;
-            first = firstLine[1];
-            second = secondLine[0];
-            third = thirdLine[thirdLine.length()-1];
-            fourth = fourthLine[fourthLine.length()-2];
-        }else{
-            string fir;
-            cin >> fir;
-            first = fir[1];
-            string sec;
-            cin >> sec;
-            second = sec[0];
-            fourth = sec[2];
-            string four;
-            cin >> four;
-            third = four[1];
-        }
-        
-
-        if(first == second){
-            if(third == fourth){
-                if(first != fourth){
-                    cout << 0 << endl;
-                }
-                else{
-                    cout << "2" << endl;
-                    cout << "1 2" << endl << "2 1" << endl; 
-                }
-            }
-            else{
-                cout << "1" << endl;
-                if(first == fourth){
-                    cout << n << ' ' << n-1 << endl;
+        vi v(n);
+        rep(i,0,n) cin >> v[i];
+        ll count = 0;
+        if(v[0] == 1){
+            ll countZero = 0;
+            rep(i,1,n){
+                if(v[i] == 0){
+                    countZero++;
+                    continue;
                 }else{
-                    cout << n-1 << ' ' << n << endl;
+                    count += countZero;
+                    countZero = 0;
                 }
             }
         }else{
-            if(third == fourth){
-                cout << "1" << endl;
-                if(first == fourth){
-                    cout << "1 2" << endl;
-                }else{
-                    cout << "2 1" << endl;
-                }
-            }else{
-                if(third == second){
-                    cout << "2" << endl;
-                    cout << "1 2" << endl << n <<' ' << n-1 << endl;
-                }else{
-                    cout << "2" << endl;
-                    cout << "1 2" << endl << n <<' ' << n-1 << endl;
+            rep(i,0,n){
+                if(v[i] == 1){
+                    ll countZero = 0;
+                    rep(j,i+1,n){
+                        if(v[j] == 0){
+                            countZero++;
+                            continue;
+                        }else{
+                            count += countZero;
+                            countZero = 0;
+                        }
+                    }
+                    break;
                 }
             }
         }
+        cout << count << endl;
     }
 return 0;
 }

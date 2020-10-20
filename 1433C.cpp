@@ -67,72 +67,36 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     while(test--){
         ll n;
         cin >> n;
-        // cout << firstSide << ' ' << secondSide << ' '<< thirdSide << ' '<< fourthSide <<endl;
-        string firstLine,secondLine,thirdLine,fourthLine;
-        char first,second,third,fourth;
-         
-        if(n >= 4){
-            cin >> firstLine;
-            cin >> secondLine;
-            for(int i=0;i<n-4;i++){
-                string s;
-                cin >> s;
+        vi a(n);
+        rep(i,0,n) cin >> a[i];
+        set <int> s;
+        rep(i,0,n) s.insert(a[i]);
+        ll maxi = *max_element(all(a));
+        // if(s.size() == 1 || s.size() == 0){
+        //     cout << -1 << endl;
+        // }else{
+        //     ll maxi = *(s.rbegin());
+        //     auto it = find(all(a),maxi);
+        //     int index;
+        //     if(it!= a.end()){
+        //         index = distance(a.begin(),it);
+        //     }else{
+        //         index = -1;
+        //     }
+        //     cout << index+1 << endl;
+        // }
+        bool check = false;
+        int i;
+        for(i=0;i<n;i++){
+            if(( i<n-1 && a[i] == maxi && a[i+1] < a[i]) || ( i>0 && a[i] == maxi && a[i-1] < a[i])){
+                check = true;
+                break;
             }
-            cin >> thirdLine;
-            cin >> fourthLine;
-            first = firstLine[1];
-            second = secondLine[0];
-            third = thirdLine[thirdLine.length()-1];
-            fourth = fourthLine[fourthLine.length()-2];
-        }else{
-            string fir;
-            cin >> fir;
-            first = fir[1];
-            string sec;
-            cin >> sec;
-            second = sec[0];
-            fourth = sec[2];
-            string four;
-            cin >> four;
-            third = four[1];
         }
-        
-
-        if(first == second){
-            if(third == fourth){
-                if(first != fourth){
-                    cout << 0 << endl;
-                }
-                else{
-                    cout << "2" << endl;
-                    cout << "1 2" << endl << "2 1" << endl; 
-                }
-            }
-            else{
-                cout << "1" << endl;
-                if(first == fourth){
-                    cout << n << ' ' << n-1 << endl;
-                }else{
-                    cout << n-1 << ' ' << n << endl;
-                }
-            }
+        if(check){
+            cout << i+1 << endl;
         }else{
-            if(third == fourth){
-                cout << "1" << endl;
-                if(first == fourth){
-                    cout << "1 2" << endl;
-                }else{
-                    cout << "2 1" << endl;
-                }
-            }else{
-                if(third == second){
-                    cout << "2" << endl;
-                    cout << "1 2" << endl << n <<' ' << n-1 << endl;
-                }else{
-                    cout << "2" << endl;
-                    cout << "1 2" << endl << n <<' ' << n-1 << endl;
-                }
-            }
+            cout << -1 << endl;
         }
     }
 return 0;
