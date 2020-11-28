@@ -66,36 +66,32 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     cin >> test;
     while(test--){
         long long n;
-        cin>>n;
-        vector<pair<ll,ll>>v;
-        for(ll i=2;i*i<=n;i++){
-            int cnt=0;
-            while(n%i==0){
-                cnt++;
-                n/=i;
+            cin>>n;
+            vector<pair<ll,ll>>a;
+            for(ll i=2;i*i<=n;i++){
+                int cnt=0;
+                while(n%i==0){
+                    cnt++;
+                    n/=i;
+                }
+                if(cnt>0)
+                    a.push_back({cnt,i});
             }
-            if(cnt>0)
-                v.push_back({cnt,i});
-        }
-        if(n>1)
-            v.push_back({1,n});
-        sort(v.begin(),v.end());
-        reverse(v.begin(),v.end());
-        vector<long long>ans;
-        // cout<<"in"<<"\n";
-        // for(auto i : v){
-        //     cout<<i.first<<" "<<i.second<<"\n";
-        // }
-        for(int i=0;i<v[0].first;i++)
-            ans.push_back(v[0].second);
-        for(int i=1;i<(int)v.size();i++){
-            for(int j=0;j<v[i].first;j++)
-                ans[v[0].first-1]*=v[i].second;
-        }
-        cout<<v[0].first<<"\n";
-        for(auto i : ans)
-            cout<<i<<" ";
-        cout<<"\n";
+            if(n>1)
+                a.push_back({1,n});
+            sort(a.begin(),a.end());
+            reverse(a.begin(),a.end());
+            vector<long long>ans;
+
+            for(int i=0;i<a[0].first;i++) ans.push_back(a[0].second);
+            for(int i=1;i<(int)a.size();i++){
+                for(int j=0;j<a[i].first;j++)
+                    ans[a[0].first-1]*=a[i].second;
+            }
+            cout<<a[0].first<<"\n";
+            for(auto i : ans)
+                cout<<i<<" ";
+            cout<<"\n";
 
     }
 return 0;
