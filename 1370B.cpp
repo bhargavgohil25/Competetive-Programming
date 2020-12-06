@@ -1,3 +1,4 @@
+// Created by ...
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
@@ -7,6 +8,7 @@ using namespace std;
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define mp make_pair
 #define deb(x) cout << #x << '=' << x << endl
 #define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
@@ -50,8 +52,9 @@ ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
-
+ll ceil(ll a,ll b){ return (a+b-1)/b; }
 //===============================================================================//
+
 
 int main(){
     fastIO;
@@ -67,22 +70,59 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     while(test--){
         ll n;
         cin >> n;
-        ll sum = 1;
-        ll i = 1;
-        ll cnt = 0;
-        while(sum < n){
-            if(sum == i*(i+1)){
-                i++;
-                sum += i;
-                //deb(sum);
-                cnt++;
-            }else{
-                sum += i;
-                //deb(sum);
-                cnt++;
+        // vi a(2*n);
+        // rep(i,0,2*n) cin >> a[i];
+        vector<pair<int, int>> even;
+        vector<pair<int, int>> odd;
+        rep(i,0,2*n){
+        	ll x;
+        	cin >> x;
+        	if(x%2 == 0){
+        		even.pb(mp(x,(i+1)));
+        	}else{
+        		odd.pb(mp(x,(i+1)));
+        	}
+        }
+        if(even.size()%2 == 0 || odd.size()%2 == 0){
+        	if(even.size() > 2){
+        		even.pop_back();
+        		even.pop_back();
+        	}else{
+        		odd.pop_back();
+        		odd.pop_back();
+        	}
+        	int i = 0;
+        	int x = even.size()/2;
+        	while(x--){
+        		cout << even[i].ss << ' '<< even[i+1].ss << endl;
+        		i += 2;
+        	}
+
+        	i = 0;
+        	x = odd.size()/2;
+        	while(x--){
+        		cout << odd[i].ss << ' '<< odd[i+1].ss << endl;
+        		i += 2;
+        	}
+        }else{
+        	even.pop_back();
+        	odd.pop_back();
+
+        	int i = 0, x = even.size() / 2;
+            while (x--)
+            {
+                cout << even[i].ss << " " << even[i + 1].ss << endl;
+                i += 2;
+            }
+ 
+            i = 0, x = odd.size() / 2;
+ 
+            while (x--)
+            {
+                cout << odd[i].ss << " " << odd[i + 1].ss << endl;
+                i += 2;
             }
         }
-        cout << cnt << endl;
     }
 return 0;
 }

@@ -1,3 +1,4 @@
+// Created by ...
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
@@ -7,6 +8,8 @@ using namespace std;
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define deb(x) cout << #x << '=' << x << endl
+#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define endl "\n"
 #define ff first
@@ -37,9 +40,10 @@ typedef map<int, int> mii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
+mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
 
-//====================//
+//===============================================================================//
 ll power(ll x, ll y) {
 ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
@@ -47,38 +51,37 @@ ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
+ll ceil(ll a,ll b){ return (a+b-1)/b; }
+//===============================================================================//
+
+bool squarePt(long double x){
+	long double sr = sqrt(x);
+	return ((sr - floor(sr)) == 0); 
+}
 
 int main(){
     fastIO;
+srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
+    ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin >> n >> k;
-        // if(k*k > n){
-        //     cout << "NO" << endl;
-        // }else if(n%2 != 0 && k%2 == 0){
-        //     cout << "NO" << endl;
-        // }else if(n%2 == 0 && k%2 != 0){
-        //     cout << "NO" << endl;
-        // }else{
-        //     cout << "YES" << endl;
-        // }
-        if(n%2 == k%2){
-            if(n >= k*k){
-                cout << "YES" << endl;
-            }else{
-                cout << "NO" << endl;
-            }
-        }else{
-            cout << "NO" << endl;
-        }
+       	ll n;
+       	cin >> n;
+
+       	int i = 1;
+       	while(1){
+       		if(i*(i+1)/2 >= n) break;
+       		i++;
+       	}
+       	ll d = (i*(i+1)/2) - n;
+       	if(d == 1) cout << i + 1 << endl;
+       	else cout << i << endl;
     }
 return 0;
 }

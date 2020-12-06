@@ -115,6 +115,7 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
         }
         ll cost = a;
         for(auto i : gaps){
+        	//deb(i);
         	if((i*b) < a){
         		cost += i*b;
         	}else{

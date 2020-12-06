@@ -65,23 +65,62 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        int n; cin >> n;
- 	int sum = 0;
- 	vi a(n);
- 	rep(i,0, n) {
- 		cin >> a[i];
- 		sum += a[i];
- 	}
- 	if(sum == 0) {
- 		cout << "NO\n";
- 		continue;
- 	} else {
- 		sort(a.begin(), a.end());
- 		cout << "YES\n";
- 		rep(i,0, n) cout << a[i] << " ";
- 		cout << "\n";
- 	}
- 
-}
+    	ll n;
+    	cin >> n;
+    	vi a(n);
+    	rep(i,0,n) cin >> a[i];
+    	ll sum_pos = 0;
+    	ll sum_neg = 0;
+    	ll count_zero = 0;
+    	rep(i,0,n){
+    		if(a[i] < 0){
+    			sum_neg += abs(a[i]);
+    		}else if(a[i] > 0){
+    			sum_pos += abs(a[i]);
+    		}else if(a[i] == 0){
+    			count_zero++;
+    		}
+    	}
+    	if(sum_neg == sum_pos){
+    		cout << "NO" << endl;
+    		continue;
+    	}
+    	cout << "YES" << endl;
+    	vi ans;
+    	if(sum_neg > sum_pos){
+    		sort(all(a));
+    		rep(i,0,n){
+    			if(a[i] < 0){
+    				ans.pb(a[i]);
+    			}
+    		}
+    		rep(i,0,n){
+    			if(a[i] > 0){
+    				ans.pb(a[i]);
+    			}
+    		}
+    		rep(i,0,count_zero){
+    			ans.pb(0);
+    		}
+    	}else{
+    		sort(all(a));
+    		reverse(all(a));
+    		rep(i,0,n){
+    			if(a[i] > 0){
+    				ans.pb(a[i]);
+    			}
+    		}
+    		rep(i,0,n){
+    			if(a[i] < 0){
+    				ans.pb(a[i]);
+    			}
+    		}
+    		rep(i,0,count_zero){
+    			ans.pb(0);
+    		}
+    	}
+    	for(auto i : ans) cout << i << ' ';
+    	cout << endl;
+	}
 return 0;
 }
