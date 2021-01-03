@@ -13,40 +13,28 @@
 using namespace std;
 //alt + ctrl + N
 
-int power(int a, int n) {
-    int res = 1;
-    while(n){
-        if(n%2){
-          res *= a;
-          n--;
-        }else{
-           a *= a;
-           n /= 2;
-        }
-    }
-    return res;
-}
-
-
 int main(){
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
-
     ll test;
     cin >> test;
     while(test--){
-        ll n,m,c;
-        cin >> n >> m >> c;
-        ll count = 0;
-        for(int i=0; i<n; i++){
-            ll x,y;
-            cin >> x >> y;
-            ll point = m*x + c - y;
-            
+        ll chef, darth;
+        cin >> darth >> chef;
+        while(chef != 0 && darth>chef){
+            darth = darth - chef;
+            chef = chef/2;
         }
-        cout << count << endl;
+
+        if(chef == 0){
+            cout << "0" << endl;
+        }
+        if(darth <= chef){
+            cout << "1" << endl;
+        }
     }
+    
 return 0;
 }

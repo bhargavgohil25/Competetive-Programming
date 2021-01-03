@@ -52,6 +52,24 @@ bool isPowerOfTwo(ll x){
 }
 
 //===============================================================================//
+ll maxN = 4000001;
+ll prime[4000001];
+
+void primesNos(){
+    rep(i,0,maxN){
+        prime[i] = true;
+    }
+    prime[0] = false;
+    prime[1] = false;
+    for(int p=2;p*p<maxN;p++){
+        if(prime[p]){
+            for(int i=2*p;i<maxN;i=i+p){
+                prime[i] = false;
+            }
+        }
+    }
+}
+
 
 int main(){
     fastIO;
@@ -61,54 +79,37 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
-
+    primesNos();
     ll test = 1;
-    //cin >> test;
+    cin >> test;
     while(test--){
-        int W, H, N, M;
-        cin >> W >> H >> N >> M;
-        vi A(N);
-        vi B(M);
-        rep(i,0,N) cin >> A[i];
-        rep(i,0,M) cin >> B[i];
-        sort(all(A));
-        sort(all(B));
-        if(A[0] > B[0])	{
-            int diff = A[0]-B[0];
-            rep(i,0,N) A[i]-=diff;
-        }	
-        else{
-            int diff = B[0]-A[0];
-            rep(i,0,M) B[i]-=diff;
+        ll n;
+        cin >> n;
+        vi b(n);
+        vi a(n);
+        rep(i,0,n){
+            cin >> b[i];
         }
-        set<int>setPts;
-        rep(i,0,N) setPts.insert(A[i]);
-        int count = 0;
-        vi test;
-        rep(i,0,M){
-            if(setPts.find(B[i])!=setPts.end())	{
+        ll count = 0;
+        ll po = 2;
+
+        while(count<n){
+            if(prime[po]){
+                a[count] = po;
                 count++;
-                test.pb(B[i]);
-                setPts.erase(B[i]);
+            }
+            po++;
+        }
+        rep(i,0,n){
+            if(b[i] != i+1){
+                a[i] = a[b[i]];
             }
         }
-        if((*setPts.begin())<=H)	{
-            test.pb((*setPts.begin()));
-            count++;
-        }
-        set<int>salute;
-        int cnt = 0;
-        rep(i,0,test.size()){
-            for(int j=i+1;j<test.size();j++)	{
-                if(salute.find(abs(test[i]-test[j])) == salute.end())	{
-                    cnt++;
-                    salute.insert(abs(test[i]-test[j]));
-                }
-            }
-        }
-        cout << cnt;
 
-
+        rep(i,0,n){
+            cout << a[i] << ' ';
+        }
+        cout << endl;
     }
 return 0;
 }

@@ -1,0 +1,54 @@
+/*
+This problem was basically done by mathematical approach.....
+because if we go directly the contraints would make Runtime Error
+
+
+easy way was,
+let, y=B-1  &   x=A-1
+   cheating is possible only when,  (y%p)==(x%p)
+     
+   we can assume 2 cases here 1) y>x
+                              2) x>y
+          for 1)  y=x-(diff.)
+                  (y%p) = (x%p)-(diff.%p)
+                  
+                  and to get, (x%p) = (x%p)-(diff.%p)
+                               (diff.%p==0)  it must follow.
+                          
+                    diff= y-x
+                        = (B-A)
+     therefore,  (B-A)%p==0
+               we simply have to find divisors.
+          
+                        
+                  
+
+*/
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cmath> 
+#include <iomanip> 
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int A,B;
+        int count=0;
+        cin>>A>>B;
+        int N=abs(B-A);
+        for(int i=1;i<=sqrt(N);i++){
+            if(N%i==0){
+                if(N/i==i){
+                    count+=1;
+                }
+                else{
+                    count+=2;
+                }
+            }
+        }
+        cout<<count<<endl;
+    }
+}
