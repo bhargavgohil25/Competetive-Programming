@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 // Created by ...
 #include <bits/stdc++.h>
 #include <iostream>
@@ -11,13 +9,9 @@ using namespace std;
 #define ui unsigned int
 #define pb push_back
 #define deb(x) cout << #x << '=' << x << endl
-#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
+#define deb2(x,y) cout << #x << '=' << x << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
-#define rall(x) x.rbegin(), x.rend()
 #define endl "\n"
-#define endline cout << endl
-#define yup cout << "Yes" << endl
-#define nope cout << "No" << endl
 #define ff first
 #define ss second
 #define lb lower_bound
@@ -54,21 +48,11 @@ ll power(ll x, ll y) {
 ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 
-ll powerM(ll x, ll y, ll M = mod) { // default argument
-    ll v = 1; x = x % M; while (y > 0) {if (y & 1)v = (v * x) % M; y = y >> 1; x = (x * x) % M;} return v;
-}
-
 bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
 ll ceil(ll a,ll b){ return (a+b-1)/b; }
 //===============================================================================//
-
-
-void solve(){
-    ll n,x,y,z,p,q,r;
-    cin >> n;
-}
 
 
 int main(){
@@ -80,14 +64,58 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
+    ll test = 1;
     cin >> test;
     while(test--){
-        solve();
+        ll n;
+        cin >> n;
+        vi a(n);
+        vi alice,bob;
+        rep(i,0,n){
+        	cin >> a[i];
+        	if(a[i]%2 == 0) alice.pb(a[i]);
+        	else bob.pb(a[i]);
+        }
+        ll ascore = 0,bscore = 0;
+        sort(all(alice));
+        sort(all(bob));
+        ll top1,top2;
+        repe(i,1,n){
+        	top1 = 0;
+        	top2 = 0;
+        	if(!alice.empty()){
+        		top1 = alice.back();
+        	}
+        	if(!bob.empty()){
+        		top2 = bob.back();
+        	}
+        	if(i%2 == 1){
+        		// alice plays
+        		if(top1 > top2){
+        			ascore += alice.back();
+        			alice.pop_back();
+        		}else{
+        			bob.pop_back();
+        		}
+        	}
+        	if(i%2 == 0){
+        		// bob plays
+        		if(top1 < top2){
+        			bscore += bob.back();
+        			bob.pop_back();
+        		}else{
+        			alice.pop_back();
+        		}
+        	}
+        }
+        //deb2(ascore,bscore);
+        if(ascore > bscore){
+        	cout << "Alice" << endl;
+        }else if(bscore > ascore){
+        	cout << "Bob" << endl;
+        }else if(ascore == bscore){
+        	cout << "Tie" << endl;
+        }
     }
 return 0;
 }
-]]></content>
-  <tabTrigger>cpp</tabTrigger>
-  <source>source.c++</source>
-</snippet>

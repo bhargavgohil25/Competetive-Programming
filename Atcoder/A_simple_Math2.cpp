@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 // Created by ...
 #include <bits/stdc++.h>
 #include <iostream>
@@ -15,16 +13,13 @@ using namespace std;
 #define all(x) x.begin(), x.end()
 #define rall(x) x.rbegin(), x.rend()
 #define endl "\n"
-#define endline cout << endl
-#define yup cout << "Yes" << endl
-#define nope cout << "No" << endl
 #define ff first
 #define ss second
 #define lb lower_bound
 #define ub upper_bound
 #define INF (int)1e9
 #define PI 3.1415926535897932384626433832795
-#define MOD 1000000007
+const ll MOD = 1e9+7;
 
 #define hcf(x,y)     __gcd(x,y)
 #define lcm(x,y)     (x*y)/(__gcd(x,y))
@@ -54,22 +49,21 @@ ll power(ll x, ll y) {
 ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 
-ll powerM(ll x, ll y, ll M = mod) { // default argument
-    ll v = 1; x = x % M; while (y > 0) {if (y & 1)v = (v * x) % M; y = y >> 1; x = (x * x) % M;} return v;
-}
-
 bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
 ll ceil(ll a,ll b){ return (a+b-1)/b; }
 //===============================================================================//
-
-
-void solve(){
-    ll n,x,y,z,p,q,r;
-    cin >> n;
+ll power(ll a,ll b,ll MOD){
+	ll res = 1;
+	a %= MOD;
+	while(b > 0){
+		if(b&1) res = (res*a) % MOD;
+		b >>= 1;
+		a = (a*a)%MOD;
+	}
+	return res;
 }
-
 
 int main(){
     fastIO;
@@ -80,14 +74,12 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
-    cin >> test;
+    ll test = 1;
+    //cin >> test;
     while(test--){
-        solve();
+        ll n,m;
+        cin >> n >> m;
+        cout << power(10,n,m*m)/m << endl;
     }
 return 0;
 }
-]]></content>
-  <tabTrigger>cpp</tabTrigger>
-  <source>source.c++</source>
-</snippet>

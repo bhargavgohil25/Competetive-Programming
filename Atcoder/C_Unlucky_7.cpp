@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 // Created by ...
 #include <bits/stdc++.h>
 #include <iostream>
@@ -13,11 +11,7 @@ using namespace std;
 #define deb(x) cout << #x << '=' << x << endl
 #define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
-#define rall(x) x.rbegin(), x.rend()
 #define endl "\n"
-#define endline cout << endl
-#define yup cout << "Yes" << endl
-#define nope cout << "No" << endl
 #define ff first
 #define ss second
 #define lb lower_bound
@@ -54,22 +48,29 @@ ll power(ll x, ll y) {
 ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 
-ll powerM(ll x, ll y, ll M = mod) { // default argument
-    ll v = 1; x = x % M; while (y > 0) {if (y & 1)v = (v * x) % M; y = y >> 1; x = (x * x) % M;} return v;
-}
-
 bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
 ll ceil(ll a,ll b){ return (a+b-1)/b; }
 //===============================================================================//
 
-
-void solve(){
-    ll n,x,y,z,p,q,r;
-    cin >> n;
+bool isSeven(ll n){
+	while(n){
+		ll k = n%10;
+		if(k == 7) return true;
+		n /= 10;
+	}
+	return false;
 }
 
+bool isOctal(ll n){
+	while(n){
+		ll k = n%8;
+		if(k == 7) return true;
+		n /= 8;
+	}
+	return false;
+}
 
 int main(){
     fastIO;
@@ -80,14 +81,22 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
-    cin >> test;
+    ll test = 1;
+    //cin >> test;
     while(test--){
-        solve();
+    	ll n;
+    	cin >> n;
+    	ll total = 0;
+    	for(int i=1;i<=n;i++){
+    		if(isSeven(i)){
+    			continue;
+    		}
+    		if(isOctal(i)){
+    			continue;
+    		}
+    		total++;
+    	}
+    	cout << total << endl;
     }
 return 0;
 }
-]]></content>
-  <tabTrigger>cpp</tabTrigger>
-  <source>source.c++</source>
-</snippet>

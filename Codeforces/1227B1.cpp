@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 // Created by ...
 #include <bits/stdc++.h>
 #include <iostream>
@@ -14,10 +12,8 @@ using namespace std;
 #define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define rall(x) x.rbegin(), x.rend()
+#define read(x) cin >> x[i]
 #define endl "\n"
-#define endline cout << endl
-#define yup cout << "Yes" << endl
-#define nope cout << "No" << endl
 #define ff first
 #define ss second
 #define lb lower_bound
@@ -54,21 +50,11 @@ ll power(ll x, ll y) {
 ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 
-ll powerM(ll x, ll y, ll M = mod) { // default argument
-    ll v = 1; x = x % M; while (y > 0) {if (y & 1)v = (v * x) % M; y = y >> 1; x = (x * x) % M;} return v;
-}
-
 bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
 ll ceil(ll a,ll b){ return (a+b-1)/b; }
 //===============================================================================//
-
-
-void solve(){
-    ll n,x,y,z,p,q,r;
-    cin >> n;
-}
 
 
 int main(){
@@ -80,14 +66,32 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
-    cin >> test;
+    ll test = 1;
+    //cin >> test;
     while(test--){
-        solve();
+    	ll n;
+    	cin >> n;
+    	vi a(n),s(n);
+    	rep(i,0,n) cin >> a[i];
+    	s = a;
+    	sort(all(s));
+    	ll m;
+    	cin >> m;
+    	for(int t=0;t<m;t++){
+    		ll k,pos;
+    		cin >> k >> pos;
+    		vi v = a;
+    		for(int i=0;i<n-k;i++){
+    			for(int j=v.size()-1;j>=0;j--){
+    				if(v[j] == s[i]){
+    					v.erase(v.begin()+j);
+    					break;
+    				}
+    			}
+
+    		}
+    		cout << v[pos-1] << endl;
+    	}    
     }
 return 0;
 }
-]]></content>
-  <tabTrigger>cpp</tabTrigger>
-  <source>source.c++</source>
-</snippet>

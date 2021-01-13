@@ -1,5 +1,3 @@
-<snippet>
-    <content><![CDATA[
 // Created by ...
 #include <bits/stdc++.h>
 #include <iostream>
@@ -14,10 +12,8 @@ using namespace std;
 #define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define rall(x) x.rbegin(), x.rend()
+#define read(x) cin >> x[i]
 #define endl "\n"
-#define endline cout << endl
-#define yup cout << "Yes" << endl
-#define nope cout << "No" << endl
 #define ff first
 #define ss second
 #define lb lower_bound
@@ -54,21 +50,11 @@ ll power(ll x, ll y) {
 ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 
-ll powerM(ll x, ll y, ll M = mod) { // default argument
-    ll v = 1; x = x % M; while (y > 0) {if (y & 1)v = (v * x) % M; y = y >> 1; x = (x * x) % M;} return v;
-}
-
 bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
 ll ceil(ll a,ll b){ return (a+b-1)/b; }
 //===============================================================================//
-
-
-void solve(){
-    ll n,x,y,z,p,q,r;
-    cin >> n;
-}
 
 
 int main(){
@@ -80,14 +66,45 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test;
+    ll test = 1;
     cin >> test;
     while(test--){
-        solve();
+        ll n;
+        cin >> n;
+        vector<pair<int,int>>a(n);
+        rep(i,0,n){
+        	ll x,b;
+        	cin >> x >> b;
+        	a[i].ff = x;
+        	a[i].ss = b;
+        }
+        bool flag = true;
+        ll play = a[0].ff ,clear = a[0].ss;
+        if(n == 1 && play < clear){
+        	cout << "NO" << endl;
+        	continue;
+        }
+        rep(i,1,n){
+			if(a[i].ff < play || a[i].ss < clear){
+				flag = false;
+				break;
+			}        
+			if(a[i].ff == play && a[i].ss > clear){
+				flag = false;
+				break;
+			}	
+			if(a[i].ff < a[i].ss || play < clear){
+				flag = false;
+				break;
+			}
+			if(abs(a[i].ff - play) < abs(a[i].ss - clear)){
+				flag = false;
+				break;
+			}
+			play = a[i].ff;
+			clear = a[i].ss;
+        }
+        cout << (flag ? "YES" : "NO") << endl;
     }
 return 0;
 }
-]]></content>
-  <tabTrigger>cpp</tabTrigger>
-  <source>source.c++</source>
-</snippet>
