@@ -3,6 +3,7 @@
 using namespace std;
 
 #define rep(i,a,b) for(int i=a; i<b; i++)
+#define rrep(i,a) for(int i=a-1;i>=0;i--)
 #define repe(i,a,b) for(int i=a; i<=b; i++)
 #define ll long long
 #define ui unsigned int
@@ -58,12 +59,17 @@ int main(){
     while(test--){
         ll n;
         cin >> n;
-        vi a(n);
-        rep(i,0,n){
-            cin >> a[i];
+        vl a(n);
+        rep(i,0,n) cin >> a[i];
+        rep(i,1,n){
+            if(abs(a[i] - a[i-1]) >= 2){
+                cout << "YES" << endl;
+                cout << i << ' ' << i+1 << endl;
+                goto out;
+            }
         }
-        ll m = *max_element(all(a));
-        //cout << lower_bound(all(a),m) - a.begin() << endl;
+        cout << "NO" << endl;
+        out:;
         
     }
 return 0;

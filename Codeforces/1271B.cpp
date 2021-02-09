@@ -11,6 +11,8 @@ using namespace std;
 #define deb(x) cout << #x << '=' << x << endl
 #define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
+#define rall(x) x.rbegin(), x.rend()
+#define read(x) cin >> x[i]
 #define endl "\n"
 #define ff first
 #define ss second
@@ -65,9 +67,57 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 #endif
 
     ll test = 1;
-    cin >> test;
+    // cin >> test;
     while(test--){
-        
+        ll n;
+        cin >> n;
+        string s;
+        cin >> s;
+        vi ans;
+        int i;
+		for(int i=1;i<n;i++){
+			// if(i == n-1) continue;
+        	if(s[i-1] == 'B'){
+        		ans.pb(i);
+        		if(s[i] == 'B') s[i] = 'W';
+        		else s[i] = 'B';
+        		s[i-1] = 'W';
+        	}
+        	// if(s[i-1] == 'W'){
+        	// 	continue;
+        	// }
+        }
+        if(s[n-1] == 'W'){
+    		cout << ans.size() << endl;
+    		for(auto i : ans){
+    			cout << i << ' ';
+    		}
+    		cout << endl;
+    	}else{
+    		// vi ans;
+    		for(int i=1;i<n;i++){
+    			// if(i == n-1) continue;
+	        	if(s[i-1] == 'W'){
+	        		ans.pb(i);
+	        		if(s[i] == 'B') s[i] = 'W';
+	        		else s[i] = 'B';
+	        		s[i-1] = 'B';
+	        		// continue;
+	        	}
+	        	// if(s[i-1] == 'B'){
+	        	// 	continue;
+	        	// }
+	        }
+	        if(s[n-1] == 'W'){
+	        	cout << -1 << endl;
+	        }else{
+	        	cout << ans.size() << endl;
+	    		for(auto i : ans){
+	    			cout << i << ' ';
+	    		}
+	    		cout << endl;
+	        }
+    	}
     }
 return 0;
 }

@@ -1,7 +1,5 @@
-3
-xabb
-aabx
-technocup
-technocup
-a
-z
+4 5
+ABABA
+BCGDG
+AAAAA
+YABSA
