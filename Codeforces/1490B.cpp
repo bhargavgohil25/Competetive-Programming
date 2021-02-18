@@ -12,15 +12,16 @@ using namespace std;
 #define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define rall(x) x.rbegin(), x.rend()
+#define yup cout << "Yes" << endl
+#define nope cout << "No" << endl
 #define read(x) cin >> x[i]
 #define endl "\n"
 #define ff first
 #define ss second
 #define lb lower_bound
 #define ub upper_bound
-#define INF (int)1e6
+#define INF (int)1e9
 #define PI 3.1415926535897932384626433832795
-#define MOD 1000000007
 
 #define hcf(x,y)     __gcd(x,y)
 #define lcm(x,y)     (x*y)/(__gcd(x,y))
@@ -44,7 +45,7 @@ typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
 mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
-
+const int M=1e9+7;
 //===============================================================================//
 ll power(ll x, ll y) {
 ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
@@ -54,47 +55,88 @@ bool isPowerOfTwo(ll x){
     return x && (!(x & (x-1)));     //check if the number is power of two or not
 }
 ll ceil(ll a,ll b){ return (a+b-1)/b; }
-//===============================================================================//
-vector<int> primes(1000001, 0);
-const int n = 1000000;
+
+vector<int>primes;
 void createSieve(){
-    bool prime[n+1];
+    bool prime[INF+1];
     memset(prime,true,sizeof(prime));
-    primes[0] = 0;
-    primes[1] = 0;
-    for (int i=2;i*i<=n;i++) {
-        // primes[i] = primes[i-1];
-        if (prime[i]) {
-			// primes[i] += 1;
-            for (int j = i*2;j<=n;j+=i) prime[j] = false;
+    for(int p=2;p*p<=INF;p++){
+        if(prime[p]){
+            for(int i=p*p;i<=INF;i+=p) prime[i] = false;
         }
     }
-    repe(i,2,n){
-        primes[i] = primes[i-1];
-        if(!prime[i]){
-            primes[i]++;
-        }
+    for(int p=2;p<=INF;p++){
+        if(prime[p]) primes.pb(p);
     }
 }
+
+long long mod(long long x){
+    return ((x%M + M)%M);
+}
+long long add(long long a, long long b){
+    return mod(mod(a)+mod(b));
+}
+long long mul(long long a, long long b){
+    return mod(mod(a)*mod(b));
+}
+ll modPow(ll a, ll b){
+    if(b==0) return 1LL;
+    if(b==1) return a%M;
+    ll res=1;
+    while(b){
+        if(b%2==1) res=mul(res,a);
+        a=mul(a,a);
+        b=b/2;
+    }
+    return res;
+}
+
+
+//===============================================================================//
+
 
 int main(){
     fastIO;
 srand(chrono::high_resolution_clock::now().time_since_epoch().count());
+
 #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
-	createSieve();
+
     ll test = 1;
     cin >> test;
     while(test--){
-    	ll x,y,p;
-    	cin >> x >> y;
-    	if(primes[x] > y){
-    		cout << "Divyam" << endl;
-    	}else{
-    		cout << "Chef" << endl;
-    	}
+        ll n;
+        cin >> n;
+        vi a(n),c(3,0);
+        ll cnt = 0;
+        rep(i,0,n){
+        	cin >> a[i];
+        	ll x = a[i]%3;
+        	c[x]++;
+        }
+		if(c[0] < n/3){
+			cnt += n/3-c[0];
+	    	c[2]= c[2]-cnt;
+	    	if(c[1]>=c[2]){
+				cnt += c[1]-n/3;
+			}
+			else{
+				cnt += 2*(c[2]-n/3);
+		    }
+	    }
+	    else{
+	    	cnt += c[0]-n/3;
+			c[1]=c[1]+ c[0]-n/3;
+			if(c[1]>=c[2]){
+				cnt+=c[1]-n/3;
+			}
+			else{
+				cnt+= 2*(c[2]-n/3);
+		    }
+		}
+		cout<< cnt <<endl;
     }
 return 0;
 }

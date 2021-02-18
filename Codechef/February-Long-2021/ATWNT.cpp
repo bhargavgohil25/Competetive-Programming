@@ -45,7 +45,7 @@ typedef unordered_map<int, int> umap_ii;
 typedef unordered_map<string, int> umap_si;
 mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 //alt + ctrl + N
-const int M=1e9+7;
+const int M=1e5+5;
 //===============================================================================//
 ll power(ll x, ll y) {
 ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
@@ -93,6 +93,51 @@ ll modPow(ll a, ll b){
 
 
 //===============================================================================//
+// ll bfs(vector<ll>& a,ll v,ll w,ll n, ll ind){
+//     bool one = (2*v>n or a[2*v]==-1);
+//     bool two = (2*v+1>n or a[2*v+1]==-1);
+//     if( one and two ) return w;
+//     ll sum=0;
+//     ll child = 0;
+//     if(2*v<=n and a[2*v]!=-1) child++;
+//     if(2*v+1<=n and a[2*v+1]!=-1) child++;
+//     if(!(w%child)){
+//         if(2*v<=n){
+//             sum += bfs(a,2*v,w/child,n,ind+1);
+//         }
+//         if(2*v+1<=n){
+//             sum+=bfs(a,2*v+1,w/child,n,ind+1);    
+//         }
+//     }
+//     return sum;
+// }
+vi adj[M];
+vi cnt(M,0);
+void ipTree(vector<int>adj[],vector<int>&cnt,int n){
+    rep(i,1,n){
+        int x;
+        cin >> x;
+        adj[x].pb(i+1);
+        cnt[x]++;
+    }
+}
+void dfs(vector<int>adj[],vector<bool>&vis,ll v,ll w,ll &d){
+    vis[v] = true;
+    ll temp = cnt[v];
+    if(temp!=0 and w%temp!=0){
+        d+=w;
+        return;
+    }
+    if(temp != 0){
+        w = w/temp;
+    }
+    for(auto i : adj[v]){
+        if(!vis[i]){
+            dfs(adj,vis,i,w,d);
+        }
+    }
+
+}
 
 
 int main(){
@@ -105,28 +150,38 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 #endif
 
     ll test = 1;
-    cin >> test;
+    //cin >> test;
     while(test--){
-        ll n,k;
-        cin >> n >> k;
-        vi a(n);
-        rep(i,0,n) cin >> a[i];
-        ll pos = 0;
-        while(k--){
-        	int i;
-        	for(i=1;i<n;i++){
-        		if(a[i] > a[i-1]){
-        			a[i-1]++;
-        			pos = i-1;
-        			break;
-        		}
-        	}
-        	if(i >= n){
-        		pos = -2;
-        		break;
-        	}
+        ll x,q,w,v,n;
+        cin >> n;
+        ipTree(adj,cnt,n);
+        cin >> q;
+         while(q--){
+            vector<bool>vis(n+1,false);
+            ll d=0;
+            ll v,w;
+            cin>>v>>w;
+            dfs(adj,vis,v,w,d);
+            cout<<d<<endl;
         }
-        cout << ++pos << endl;
+        // map<int,set<int>> m;
+        // map<pair<int,int>,int> mp;
+        // vl a(10001,-1);
+        // a[1]=1;
+        // repe(i,2,n){
+        //     cin >> x;
+        //     m[x].insert(i);
+        //     int l = 2*x;
+        //     int t = 2*x+1;
+        //     if(a[l]==-1) a[l]=i;
+        //     else a[t]=i;
+        // }
+        // cin >> q;
+        // while(q--){
+        //     cin>>v>>w;
+        //     cout<<w-bfs(a,v,w,n,0)<<endl;
+        // }    
     }
 return 0;
 }
+
