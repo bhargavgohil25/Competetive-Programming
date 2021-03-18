@@ -93,7 +93,46 @@ ll modPow(ll a, ll b){
 
 
 //===============================================================================//
-
+ll h,m;
+map<char, char> mp = {
+  {'0', '0'},
+  {'1', '1'},
+  {'5', '2'},
+  {'8', '8'},
+  {'2', '5'}, 
+};
+bool valid (int x, int y) {
+	string sx = to_string(x);
+	string sy = to_string(y);
+	while (sx.length() < 2) {
+		sx = '0' + sx;
+	}
+	while (sy.length() < 2) {
+		sy = '0' + sy;
+	}
+	for (char& c : sx) {
+		if (!mp.count(c)) {
+		  return false;
+		}
+	}
+	for (char& c : sy) {
+		if (!mp.count(c)) {
+		  return false;
+		}
+	}
+	reverse(all(sx));
+	reverse(all(sy));
+	for (char& c : sx) {
+		c = mp[c];
+	}
+	for (char& c : sy) {
+		c = mp[c];
+	}
+	if (stoi(sy) >= 0 and stoi(sy) < h and stoi(sx) >= 0 and stoi(sx) < m) {
+		return true;
+	}
+	return false;
+};
 
 int main(){
     fastIO;
@@ -107,19 +146,28 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
-        }
-        cout<<endl;
-    }
+	    cin >> h >> m;
+	    string s;
+	    cin >> s;
+	    ll hour = stoi(s.substr(0, s.find(":")));
+	    ll minute = stoi(s.substr(s.find(":") + 1));
+	    while (valid(hour, minute) == false) {
+	    	minute++;
+	      	if(minute == m) {
+	        	minute %= m;
+	        	hour++;
+	      	}
+	      	hour %= h;
+	    } 
+	    string x = to_string(hour);
+	    string y = to_string(minute);
+	    while (x.length() < 2) {
+	      x = '0' + x;
+	    }
+	    while (y.length() < 2) {
+	      y = '0' + y;
+	    }
+	    cout << x << ':' << y << endl;
+	  } 
 return 0;
 }

@@ -91,6 +91,9 @@ ll modPow(ll a, ll b){
     return res;
 }
 
+// Bhargav Gohil : 2019045
+// Indian Institute Of Informtion Technology, Jabalpur
+// Computer Science and Engineering.
 
 //===============================================================================//
 
@@ -105,21 +108,18 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 #endif
 
     ll test = 1;
-    cin >> test;
+    // cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
+        string s;
+        cin >> s;
+        string c = "";
+        
+        for(int i=0;i<s.length();i++){
+            if( s[i] - 'A' >= 65 || s[i] - 'A'<= 90 || s[i] - 'a' >= 97 || s[i] - 'a' <= 122 ){
+                c += tolower(s[i]);
             }
         }
-        cout<<endl;
+        cout << c << endl;
     }
 return 0;
 }

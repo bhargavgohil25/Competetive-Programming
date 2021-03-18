@@ -107,19 +107,36 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
-        }
-        cout<<endl;
+    	ll n,k,i;
+    	ll a[100005], miss, new_el;
+    	bool check = false;
+		cin>>n>>k;
+		for(i=0;i<n;i++)cin>>a[i];
+		sort(a, a+n);
+		if(k==0){
+			cout<<n<<endl; 
+			continue;
+		}
+		for(i=0;i<n;i++){
+			if(i!=a[i]){
+				miss=i;
+				break;
+			}
+		}
+		if(i==n) miss=n;
+ 
+		if(miss==n){
+			cout<<n+k<<endl; continue;
+		}
+ 
+		new_el=(miss + a[n-1])/2 + (miss + a[n-1])%2;
+ 
+		for(i=0;i<n;i++){
+			if(a[i]==new_el) check = true;
+		}
+ 
+		if(check) cout<<n<<endl;
+		else cout<<n+1 << endl;
     }
 return 0;
 }

@@ -93,8 +93,36 @@ ll modPow(ll a, ll b){
 
 
 //===============================================================================//
+void solve(){
+	ll n,p;
+	cin >> n >> p;
+	vl s(n);
+	for(int i=0;i<n;i++){
+		cin >> s[i];
+	}
+	sort(all(s));
+	ll mini = 1e18;
+	ll curr = 0;
+	for(int i=0;i<n;i++){
+		if(i+1 < p){
+			curr += s[i];
+		}else if(i == p-1){
+			curr += s[i];
+			ll ans = s[i] * p - curr;
+			mini = min(ans,mini);
+		}else{
+			curr += s[i];
+			curr -= s[i-p];
+			ll ans = s[i]*p - curr;
+			mini = min(mini,ans);
+		}
+	}
+	cout << mini << endl;
+}
 
 
+// 1 3 9 100
+// 1 4 
 int main(){
     fastIO;
 srand(chrono::high_resolution_clock::now().time_since_epoch().count());
@@ -104,22 +132,11 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     freopen("output.txt","w",stdout);
 #endif
 
-    ll test = 1;
-    cin >> test;
-    while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
-        }
-        cout<<endl;
+    ll t = 1;
+    cin >> t;
+    for(int i=1;i<=t;i++){
+        cout << "Case #" << i << ": " ;
+        solve();
     }
 return 0;
 }

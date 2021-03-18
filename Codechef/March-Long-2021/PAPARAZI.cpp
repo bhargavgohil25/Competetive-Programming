@@ -9,7 +9,7 @@ using namespace std;
 #define ui unsigned int
 #define pb push_back
 #define deb(x) cout << #x << '=' << x << endl
-#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
+#define deb2(x,y) cout << #x << '=' << x << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define rall(x) x.rbegin(), x.rend()
 #define yup cout << "Yes" << endl
@@ -107,19 +107,54 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
+        int n; 
+        cin>>n;
+        int ans = INT_MIN;
+        vector<pair<int,int>> paired;
+        vector<pair<int,int>> temp;
+        rep(i,0,n){
+            int x; 
+            cin>>x;
+            paired.pb({ i+1,x });
         }
-        cout<<endl;
+
+        temp.pb(paired[0]);
+        temp.pb(paired[1]);
+        int siz = temp.size();
+
+        rep(i,2,n){
+            while(temp.size() >= 2){
+                double s11 = ((double)temp[siz-1].ss - (double)temp[siz-2].ss);
+                double s12 = ((double)temp[siz-1].ff - (double)temp[siz-2].ff);
+
+                double s21 = ((double)paired[i].ss - (double)temp[siz-1].ss);
+                double s22 = ((double)paired[i].ff - (double)temp[siz-1].ff);
+
+                // deb2(s1,s2);
+                // deb2(s11,s12);
+                // deb(s21,s22);
+                double s1 = s11/s12;
+                double s2 = s21/s22;
+
+                if(s1 <= s2){
+                    temp.pop_back();
+                    siz--;
+                }
+                else break;
+
+                // deb(siz);
+            }
+            temp.pb(paired[i]);
+            siz++;
+            ans = max(double(ans),double(temp[siz-1].ff - temp[siz-2].ff));
+        }
+        cout<<ans<<endl;
     }
 return 0;
 }
+
+
+
+// 9457033277
+
+// 7088481818

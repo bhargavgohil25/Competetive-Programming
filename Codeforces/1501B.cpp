@@ -4,7 +4,7 @@
 using namespace std;
 
 #define rep(i,a,b) for(int i=a; i<b; i++)
-#define repe(i,a,b) for(int i=a; i<=b; i++)
+#define repe(i,a,b) for(int i=b-1; i >= a; i--)
 #define ll long long
 #define ui unsigned int
 #define pb push_back
@@ -107,19 +107,31 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
-        }
-        cout<<endl;
-    }
+    	ll n;
+	    cin>>n;
+	    vi v;
+	    rep(i,0,n){
+	        v.pb(0);
+	    }
+	    vi a;
+	    rep(i,0,n){
+	        ll x;
+	        cin>>x;
+	        a.pb(x);
+	    }
+	 
+	    ll end= n;
+	    for(ll j=n-1;j>=0; j--){
+	        end = min(end , j-a[j]+1);
+	        if(end <= j){
+	            v[j]=1;
+	        }
+	    }
+	 
+	    for(auto i : v){
+	        cout<< i <<" ";
+	    }
+	    cout<<endl;
+	}
 return 0;
 }

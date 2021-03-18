@@ -108,18 +108,14 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     cin >> test;
     while(test--){
         ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
-        }
-        cout<<endl;
+        cin >> n >> k;
+        string s;
+        cin >> s;
+		bool ok = true;
+		rep(i,0,k) if (s[i] != s[n-1-i]) ok = false;
+		if (2*k == n) ok = false;
+ 		cout << (ok ? "YES" : "NO") << endl;
+	
     }
 return 0;
 }

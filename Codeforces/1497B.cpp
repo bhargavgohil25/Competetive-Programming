@@ -91,7 +91,7 @@ ll modPow(ll a, ll b){
     return res;
 }
 
-
+const int N = 5e5 + 5;
 //===============================================================================//
 
 
@@ -107,19 +107,34 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
-        }
-        cout<<endl;
+    	ll n,m;
+    	cin>>n>>m;
+		ll x;
+		map<int,int>mp;
+		rep(i,0,n){
+			cin>>x;
+			mp[x%m]++;
+		}
+		ll t,ctr=0;
+		if(mp[0])
+			ctr++;
+		for(int i=1; i<=m/2; i++){
+			t=min(mp[i], mp[m-i]);
+			if(t>0){
+				mp[i]-=t;
+				mp[m-i]-=t;
+				if(mp[i]!=0){
+					mp[i]--;
+				}
+				else if(mp[m-i]!=0){
+					mp[m-i]--;
+				}
+				ctr++;
+			}
+			if(mp[i]>0) ctr+=mp[i];
+			if(mp[m-i]>0) ctr+=mp[m-i];
+		}
+		cout<<ctr<<endl;
     }
 return 0;
 }

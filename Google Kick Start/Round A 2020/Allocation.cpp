@@ -93,7 +93,20 @@ ll modPow(ll a, ll b){
 
 
 //===============================================================================//
-
+int solve(){
+	ll n,b;
+	cin >> n >> b;
+	vi a(n);
+	rep(i,0,n) cin >> a[i];
+	sort(all(a));
+	ll cnt = 0;
+	ll sum = 0;
+	for(int i=0;i<n;i++){
+		sum += a[i];
+		if(sum <= b) cnt++;
+	}
+	return cnt;
+}
 
 int main(){
     fastIO;
@@ -106,20 +119,11 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
     ll test = 1;
     cin >> test;
-    while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
-        }
-        cout<<endl;
+    ll t = 1;
+    while(test){
+        cout << "Case #" << t << ": " << solve() << endl;
+        test--;
+        t++;
     }
 return 0;
 }

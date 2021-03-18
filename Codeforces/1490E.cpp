@@ -107,19 +107,19 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n;
+        int n;
 	    cin >> n;
 	    vector<pair<int, int>> v;
 	    vi pref(n, 0);
-	    rep(i,0,n){
-	        ll g;
+	    for(int i=0;i<n;i++){
+	        int g;
 	        cin >> g;
 	        v.pb(make_pair(g, i + 1));
 	    }
 	    sort(all(v));
 	    vector<int> ans;
 	    pref[0] = v[0].first;
-	    rep(i,1,n){
+	    for(int i=1;i<n;i++) {
 	        pref[i] = pref[i - 1] + v[i].first;
 	    }
 	    if (n == 1){
@@ -127,18 +127,18 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 	        cout << 1 << endl;
 	    }
 	    else{
-	        ll ind = 0;
-	        rep(i,1,n){
+	        int ind = 0;
+	        for(int i=1;i<n;i++){
 	            if (pref[i - 1] < v[i].first){
 	                ind = i;
 	            }
 	        }
-	        rep(i,ind,n){
+	        for(int i=ind;i<n;i++){
 	            ans.pb(v[i].second);
 	        }
 	        cout << ans.size() << endl;
 	        sort(all(ans));
-	        rep(i,0,ans.size()){
+	        for(int i=0;i<ans.size();i++){
 	            cout << ans[i] << " ";
 	        }
 	        // for(auto i : ans) cout << i << ' ';

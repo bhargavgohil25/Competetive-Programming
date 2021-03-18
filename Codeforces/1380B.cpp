@@ -104,22 +104,31 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     freopen("output.txt","w",stdout);
 #endif
 
+	map<char,char> reverse;
+	reverse['S'] = 'R';
+    reverse['R'] = 'P';
+    reverse['P'] = 'S';
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
-        }
-        cout<<endl;
+        string s;
+	    cin>>s;
+	    map<char,int>mp;
+	    rep(i,0,s.size()){
+	        mp[s[i]]++;
+	    }
+	    char po;
+	    int maxi = 0;
+	    for(auto it : mp){
+	        if(maxi < it.second){
+	            maxi = it.second;
+	            po=reverse[it.first];
+	        }
+	    }
+	    rep(i,0,s.size()){
+	        cout << po;
+	    }
+	    cout << endl;
     }
 return 0;
 }

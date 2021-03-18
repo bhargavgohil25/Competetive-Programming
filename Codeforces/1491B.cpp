@@ -8,6 +8,7 @@ using namespace std;
 #define ll long long
 #define ui unsigned int
 #define pb push_back
+#define clock cerr<<"\n"<<(float)clock()/CLOCKS_PER_SEC*1000<<" ms"<<endl;
 #define deb(x) cout << #x << '=' << x << endl
 #define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
@@ -103,23 +104,31 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
 #endif
-
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
+        ll n,u,v;
+        cin >> n >> u >> v;
+        vi a(n);
+        ll ans = INT_MAX;
+        rep(i,0,n) cin >> a[i];
+        rep(i,1,n){
+        	if(abs(a[i] - a[i-1]) >= 2){
+        		ans = 0;
+        		// continue;
+        	}
+        	if(abs(a[i]-a[i-1]) == 1){
+        		ans = min(ans,min(v,u));
+        		// continue;
+        	}
+        	if(a[i] == a[i-1]){
+        		ans = min(ans,v + min(v,u));
+        	}
         }
-        cout<<endl;
+        cout << ans << endl;
     }
 return 0;
 }
+
+
+

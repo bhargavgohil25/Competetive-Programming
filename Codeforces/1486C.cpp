@@ -107,19 +107,49 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
-        }
-        cout<<endl;
+        ll n;
+		cin>>n;
+		cout<<"? 1 "<<n<<endl;
+		ll p1;
+		cin>>p1;
+		int lt = 1, l = 1, r = n - 1, rt = n - 1;
+		while(l + 1 < r){
+			int t = (l + r + 1) / 2;
+			if(p1 <= t){
+				cout<<"? "<<lt<<" "<<t<<endl;
+				ll p;
+				cin>>p;
+				if(p == p1){
+					r = t;
+					rt = t;
+				}
+				else{
+					l = t + 1;
+				}
+			}
+			else{
+				cout<<"? "<<t<<" "<<rt<<endl;
+				ll p;
+				cin>>p;
+				if(p == p1){
+					l = t + 1;
+					lt = t + 1;
+				}
+				else{
+					r = t;
+				}
+			}
+		}
+		if(l == r) cout<<"! "<<l<<endl;
+		else {
+			cout<<"? "<<l<<" "<<r<<endl;
+			ll p;
+			cin>>p;
+			if(p == l) cout<<"! "<<r<<endl;
+			else cout<<"! "<<l<<endl;
+		}
+		cout.flush();
+		return 0;
     }
 return 0;
 }

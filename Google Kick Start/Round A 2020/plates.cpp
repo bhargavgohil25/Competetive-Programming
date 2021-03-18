@@ -90,10 +90,14 @@ ll modPow(ll a, ll b){
     }
     return res;
 }
-
+int n,k,p;
+int plates[n][k];
+int sum[n][k];
 
 //===============================================================================//
+int solve(){
 
+}
 
 int main(){
     fastIO;
@@ -106,20 +110,18 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 
     ll test = 1;
     cin >> test;
-    while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
+    ll t = 1;
+    while(test){
+        cin >> n >> k >> p;
+        repe(i,1,n){
+            repe(j,1,k){
+                cin >> plates[i][j];
+                sum[i][j] = 
             }
         }
-        cout<<endl;
+        cout << "Case #" << t << ": " << solve() << endl;
+        test--;
+        t++;
     }
 return 0;
 }

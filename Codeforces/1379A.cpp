@@ -93,7 +93,15 @@ ll modPow(ll a, ll b){
 
 
 //===============================================================================//
+string k = "abacaba";
 
+bool check(int i, string s){
+	bool flag = true;
+	for(int j=0;j<7;i++){
+		if(!(s[i+j] == k[j]) || )
+	}
+
+}
 
 int main(){
     fastIO;
@@ -107,19 +115,26 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
+        int n;
+        cin >> n;
+        string s;
+        cin >> s;
+        int cnt = 0;
+        for(int i=0; i<=n-7 ;i++) {
+        	if(s.substr(i,7) == "abacaba"){
+        		cnt++;
+        	}
         }
-        cout<<endl;
+        if(cnt < 2){
+        	for(int i=0;i<n-7;i++){
+        		string temp = s;
+        		int cnt1 = 0;
+        		if(check(i,temp)){
+
+        		}
+        	}
+        }
+
     }
 return 0;
 }

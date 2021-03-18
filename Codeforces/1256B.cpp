@@ -107,19 +107,23 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
+        ll n;
+        cin >> n;
+        vi a(n);
+        rep(i,0,n){
+        	cin >> a[i]; 
+        } 
+        ll pos = 0;
+        while(pos < n){
+        	ll nxtSmall = min_element(a.begin()+pos,a.end()) - a.begin(); // getting the index of the smallest element
+        	ll swapEl = a[nxtSmall];
+        	a.erase(a.begin()+nxtSmall);
+        	a.insert(a.begin()+pos,swapEl);
+        	if(pos == nxtSmall) pos = nxtSmall + 1;
+        	else pos = nxtSmall;
         }
-        cout<<endl;
+        for(auto i : a) cout << i << ' ';
+    	cout <<endl;
     }
 return 0;
 }

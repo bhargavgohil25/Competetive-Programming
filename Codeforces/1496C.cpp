@@ -6,6 +6,7 @@ using namespace std;
 #define rep(i,a,b) for(int i=a; i<b; i++)
 #define repe(i,a,b) for(int i=a; i<=b; i++)
 #define ll long long
+#define ld long double
 #define ui unsigned int
 #define pb push_back
 #define deb(x) cout << #x << '=' << x << endl
@@ -107,19 +108,26 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
-        }
-        cout<<endl;
+    	int n;
+	    cin >> n;
+	    vi x, y;
+	    rep(i,0,2*n){
+	        int a, b;
+	        cin >> a >> b;
+	        if(b == 0)
+	          x.pb(abs(a));
+	        else
+	          y.pb(abs(b));
+	    }
+	    sort(x.begin(), x.end());
+	    sort(y.begin(), y.end());
+	    double ans = 0.0;
+	    rep(i,0,n){
+	        double temp = sqrt((x[i]*x[i])+(y[i]*y[i]));
+	        ans += temp;
+	    }
+	    cout << fixed << setprecision(15) << ans;
+	    cout << endl;
     }
 return 0;
 }

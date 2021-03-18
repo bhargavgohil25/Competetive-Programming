@@ -5,6 +5,7 @@ using namespace std;
 
 #define rep(i,a,b) for(int i=a; i<b; i++)
 #define repe(i,a,b) for(int i=a; i<=b; i++)
+#define rrep(i,a,b) for(int i=b-1;i>=a;i--)
 #define ll long long
 #define ui unsigned int
 #define pb push_back
@@ -105,21 +106,46 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 #endif
 
     ll test = 1;
-    cin >> test;
+    // cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
+        ll n,m;
+        cin >> n >> m;
+        string s,t;
+        cin >> s >> t;
+        map<char,vector<ll>>mp;
+        rep(i,0,n){
+        	mp[s[i]].pb(i+1);
         }
-        cout<<endl;
+        vl p;
+        rep(i,0,m){
+        	char l = t[i];
+        	// mp[l].front();
+        	p.pb(mp[l].front());
+        }
+        ll ans = INT_MIN;
+        sort(all(p));
+        // for(auto i : p) cout << i << ' ';
+        for(int i=1;i<m;i++){
+        	ll d = p[i] - p[i-1];
+        	ans = max(ans,d);
+        }
+        if(mp.size()!=1) cout << ans << endl;
+        else cout << n-1 << endl;
+      //   vl a,b;
+      //   int j = 0;
+      //   rep(i,0,n){
+      //   	if(s[i] == t[j]) a.pb(i),j++;
+      //   }
+      //   j = m-1;
+      //   rrep(i,0,n){
+      //   	if(s[i] == t[j]) b.pb(i), j--;
+      //   }
+      //   ll ans = INT_MIN;
+      // reverse(all(b));
+      //   rep(i,0,a.size()-1){
+      //   	ans = max(ans, b[i+1]-a[i]);
+      //   }
+      //   cout << ans << endl;
     }
 return 0;
 }

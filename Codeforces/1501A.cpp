@@ -107,19 +107,28 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
+    	int n;
+        cin>>n;
+        ll a[n];
+        rep(i,0,n) cin >> a[i];
+        vector<int> v;
+        for(ll i=n-1;i>=0;i--)
+        {
+            if(a[i]>0)
+            {
+                ll p = i;
+                while(a[p]>0 && i>=0)
+                {
+                    v.push_back(1);
+                    a[p]--;
+                    i--;
                 }
             }
+            else
+            v.push_back(0);
         }
-        cout<<endl;
+        rep(i,0,n)cout<<v[i]<<" ";
+        cout<<"\n";
     }
 return 0;
 }

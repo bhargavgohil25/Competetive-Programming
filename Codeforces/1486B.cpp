@@ -94,6 +94,19 @@ ll modPow(ll a, ll b){
 
 //===============================================================================//
 
+// set<pair<ll,ll>> st;
+ 
+// void init(ll x,ll y) {
+//   st.insert({x, y});
+//   st.insert({x - 1, y});
+//   st.insert({x, y - 1});
+//   st.insert({x + 1, y});
+//   st.insert({x, y + 1});
+//   st.insert({x - 1, y - 1});
+//   st.insert({x + 1, y + 1});
+//   st.insert({x - 1, y + 1});
+//   st.insert({x + 1, y - 1});
+// }
 
 int main(){
     fastIO;
@@ -107,19 +120,48 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
-        }
-        cout<<endl;
-    }
+        int n, i, a, b;
+	    cin >> n ;
+	    vector<int> x,y;
+	    for(i=1; i<=n; ++i){
+	        cin >> a >> b;
+	        x.pb(a);
+	        y.pb(b);
+	    }
+
+	    if(n==1) cout << "1\n"<<endl;
+	    else if(n==2){
+	        a = x[1]-x[0]+1;
+	        if(a<0) a*=-1;
+
+	        b = y[1]-y[0]+1;
+	        if(b<0) b*=-1;
+
+	        cout <<  a*b << endl;
+	    }
+	    else{
+	        sort(all(x));
+	        sort(all(y));
+	        if(n%2){
+	            cout << "1\n";
+	        }
+	        else{
+	            int sum=0;
+	            if(x[0]==x[x.size()-1]){
+	                sum+=1;
+	            }
+	            else{
+	                sum+=2;
+	            }
+	            if(y[0]==y[x.size()-1]){
+	                sum+=1;
+	            }
+	            else{
+	                sum+=2;
+	            }
+	            cout <<sum<<endl;;
+	        }
+	    }
+  	}
 return 0;
 }

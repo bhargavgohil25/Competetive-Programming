@@ -9,7 +9,7 @@ using namespace std;
 #define ui unsigned int
 #define pb push_back
 #define deb(x) cout << #x << '=' << x << endl
-#define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
+#define deb2(x,y) cout << #x << '=' << x << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define rall(x) x.rbegin(), x.rend()
 #define yup cout << "Yes" << endl
@@ -105,21 +105,44 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 #endif
 
     ll test = 1;
-    cin >> test;
+    // cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
+        ll n,q;
+        cin >> n >> q;
+        vi a(n);
+        ll one = 0;
+        ll zer = 0;
+        repe(i,1,n) {
+        	cin >> a[i];
+        	if(a[i] == 1) one++;
+        	else zer++;
         }
-        cout<<endl;
+        // deb2(one,zer);
+        repe(i,1,q){
+        	ll t,x;
+        	cin >> t >> x;
+        	if(t == 1){
+        		if(a[x] == 1){
+        			// cout << 0 << endl;
+        			one--;
+        			zer++;
+        			a[x] = 0;
+        		}else{
+        			// cout << 1 << endl;
+        			one++;
+        			zer--;
+        			a[x] = 1;
+        		}
+        	}
+        	if(t == 2){
+        		if(x > one){
+        			cout << 0 << endl;
+        		}else{
+        			cout << 1 << endl;
+        		}
+        	}
+        }
+
     }
 return 0;
 }

@@ -12,8 +12,8 @@ using namespace std;
 #define deb2(x,y) cout << #x << '=' << x << << #y << '=' << y << endl
 #define all(x) x.begin(), x.end()
 #define rall(x) x.rbegin(), x.rend()
-#define yup cout << "Yes" << endl
-#define nope cout << "No" << endl
+#define yup cout << "YES" << endl
+#define nope cout << "NO" << endl
 #define read(x) cin >> x[i]
 #define endl "\n"
 #define ff first
@@ -22,14 +22,15 @@ using namespace std;
 #define ub upper_bound
 #define INF (int)1e9
 #define PI 3.1415926535897932384626433832795
-
+#define sz(x) (int)(x).size()
 #define hcf(x,y)     __gcd(x,y)
 #define lcm(x,y)     (x*y)/(__gcd(x,y))
 #define CountOne(x)  __builtin_popcount(x)        
 #define parity(x)    __builtin_parity(x)           //Funtion return (true) if number of set bits is odd(odd parity) else false..
 #define LeadZero(x)  __builtin_clz(x)             //Counts leading zero in binary representation of x ....   
 #define TrailZero(x) __builtin_ctz(x)
-
+// #define yup cout <<  "YES" << endl
+// #define nope cout <<  "NO" << endl
 #define fastIO ios::sync_with_stdio(0); cin.tie(0); cout.tie(0)
 
 typedef vector<int> vi;
@@ -94,6 +95,30 @@ ll modPow(ll a, ll b){
 
 //===============================================================================//
 
+void solve(){
+	ll n;
+	cin >> n;
+	vi arr(n);
+	rep(i,0,n) cin >> arr[i];
+    unordered_map<int, vector<pair<int,int>>> map;
+    rep(i,0,n-1) {
+        rep(j,i+1,n) {
+            int sum = arr[i] + arr[j];
+            if (map.find(sum) != map.end()) {
+                for (auto pair : map.find(sum)->second) {
+                    int m = pair.first, n = pair.second;
+                    if ((m != i && m != j) && (n != i && n != j)) {
+                    	yup;
+                        cout << i+1<<" "<<j+1<<" "<<m+1<<" "<<n+1<<endl;
+                        return;
+                    }
+                }
+            }
+            map[sum].push_back({ i, j });
+        }
+    }
+    nope;
+}
 
 int main(){
     fastIO;
@@ -105,21 +130,9 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
 #endif
 
     ll test = 1;
-    cin >> test;
+    // cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
-        }
-        cout<<endl;
+    	solve();
     }
 return 0;
 }

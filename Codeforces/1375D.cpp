@@ -94,6 +94,32 @@ ll modPow(ll a, ll b){
 
 //===============================================================================//
 
+int n;
+vi a(1001);
+
+int findMex(){
+	vi b(n+1,0);
+	int ind = 0;
+	rep(i,0,n){
+		b[a[i]] = 1;
+		while(b[ind] == 1) ind++;
+	}
+	return ind;
+}
+
+int getNonPos(){
+	rep(i,0,n){
+		if(a[i] != i) return i;
+	}
+	return 0;
+}
+int getVal(int val){
+	rep(i,0,n){
+		if(a[i] == val) return i;
+	}
+	return 0;
+}
+
 
 int main(){
     fastIO;
@@ -107,19 +133,27 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
+        cin >> n;
+        rep(i,0,n) cin >> a[i];
+        vi ans;
+        rep(i,0,n){
+        	int currMex = findMex();
+        	if(currMex == n){
+        		int non = getNonPos();
+        		int pos = getVal(non);
+        		a[pos] = currMex;
+        		ans.pb(pos);
+        		currMex = non;
+        	}
+        	a[currMex] = currMex;
+        	ans.pb(currMex);
         }
-        cout<<endl;
+        cout << ans.size() << endl;
+        for(auto i : ans){
+        	cout << i + 1 << ' ';
+        }
+        cout << endl;
+
     }
 return 0;
 }

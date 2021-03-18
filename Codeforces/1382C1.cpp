@@ -95,6 +95,7 @@ ll modPow(ll a, ll b){
 //===============================================================================//
 
 
+
 int main(){
     fastIO;
 srand(chrono::high_resolution_clock::now().time_since_epoch().count());
@@ -107,19 +108,21 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
+        ll n;
+        cin >> n;
+        string a,b;
+        vi ans;
+        cin >> a >> b;
+        rep(i,0,n){
+        	if(a[i] != b[i]){
+        		ans.pb(i+1);
+        		ans.pb(1);
+        		ans.pb(i+1);
+        	}
         }
-        cout<<endl;
+        cout << ans.size() << ' ';
+        for(auto i : ans) cout << i << ' ';
+        cout << endl;
     }
 return 0;
 }

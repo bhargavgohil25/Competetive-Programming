@@ -56,6 +56,18 @@ bool isPowerOfTwo(ll x){
 }
 ll ceil(ll a,ll b){ return (a+b-1)/b; }
 
+ll XOR(ll x, ll y){
+    ll res = 0; 
+    for (int i = 31; i >= 0; i--){
+       bool b1 = x & (1 << i);
+       bool b2 = y & (1 << i);
+        bool xoredBit = (b1 & b2) ? 0 : (b1 | b2);          
+        res <<= 1;
+        res |= xoredBit;
+    }
+    return res;
+}
+
 vector<int>primes;
 void createSieve(){
     bool prime[INF+1];
@@ -94,7 +106,6 @@ ll modPow(ll a, ll b){
 
 //===============================================================================//
 
-
 int main(){
     fastIO;
 srand(chrono::high_resolution_clock::now().time_since_epoch().count());
@@ -107,19 +118,16 @@ srand(chrono::high_resolution_clock::now().time_since_epoch().count());
     ll test = 1;
     cin >> test;
     while(test--){
-        ll n,k;
-        cin>>n>>k;
-        ll r = n/2;
-        for(ll i = 1;i<=1000000;i++){
-            ll s = n - 2*i;
-            if(s <= r && s >0){
-                if(s%i == 0 || i%s == 0){
-                    cout<<i<<" "<<i<<" "<<s;
-                    break;
-                }
-            }
+        ll c;
+        cin >> c;
+        ll sum = 0,k = 1;
+        while(c >= sum){
+            sum = 1 << k;
+            k++;
         }
-        cout<<endl;
+        ll j = 1 << (k-2);
+        ll v = sum-c;
+        cout << (j-1)*((j-1)+v) << endl;
     }
 return 0;
 }
