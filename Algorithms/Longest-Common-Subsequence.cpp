@@ -1,4 +1,4 @@
-// Created by ...
+// Created by ... 
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
@@ -83,37 +83,78 @@ void init() {
 }
 
 //===============================================================================//
-ll dp[105][1005];
 
-ll solveDP(ll n, ll sum){
-
-    if(n == 0 and sum == 0){
-        return 1;
-    }
-    if(n < 0 || sum < 0){
-        return 0;
-    }
-
-    if(dp[n][sum] != -1){
-        return dp[n][sum];
-    }
-    int ans = 0;
-
-    for(int dig=0; dig<=9; dig++){
-        ans += solveDP(n-1, sum-dig);
-    }
-
-    return dp[n][sum] = ans;
-}
-
-// O(10 * N * K)
+vector<vector<int>>dp(3001, vector<int>(3001));
+vector<vector<int>>choice(3001, vector<int>(3001));
+// we are declaring the choice vector to store the selected character
+// means 
+// 0 --> (i-1, j)
+// 1 --> (i, j-1)
+// 2 --> (i-1, j-1)
 
 void solve(){
-    int n,sum;
-    memset(dp, -1, sizeof dp);
-    cin >> n >> sum;
-    
-    cout << solveDP(n,sum);
+	string s,t;
+	cin >> s >> t;
+
+	int n = s.length();
+	int m = t.length();
+	
+	dp[0][0] = (s[0] == t[0] ? 1 : 0);
+	if(s[0] == t[0]){
+		choice[0][0] = 2;
+	}
+
+	for(int i=0; i<n; i++){
+		for(int j=0; j<m; j++){
+			// Not Picking the Current element
+			// this means we are not including the i'th character of the 
+			// s string 
+			if(i > 0){
+				dp[i][j] = dp[i-1][j];
+				choice[i][j] = 0;
+			}
+			// this means that we are not including the j'th character of the 
+			// t string 
+			if(j > 0){
+				if(dp[i][j-1] > dp[i][j]){
+					dp[i][j] = dp[i][j-1];
+					choice[i][j] = 1;
+				}
+				// dp[i][j] = max(dp[i][j], dp[i][j-1]);
+			}
+
+			// Now Picking the current Character
+			if(s[i] == t[j]){
+				int ans = 1;
+				if(i > 0 and j > 0){
+					ans = 1 + dp[i-1][j-1]; // Means we are incrementing 1 to to the answer upto its back
+				}
+				if(ans > dp[i][j]){
+					dp[i][j] = ans;
+					choice[i][j] = 2;
+				}
+			}
+		}
+	}
+
+	// now we are recovering the best choices made at every steps 
+	// starting from the last step
+	int i = n-1, j = m - 1;
+	string ans = "";
+	while(i >= 0 and j >= 0){
+		if(choice[i][j] == 0){
+			i--;
+		} else if(choice[i][j] == 1){
+			j--;
+		}else{
+			ans.pb(s[i]);
+			i--;
+			j--;
+		}
+	}
+	reverse(ans.begin(), ans.end());
+	cout << ans << endl;
+	// cout << dp[n-1][m-1] << endl;
 }
 
 int main() {

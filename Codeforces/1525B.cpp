@@ -83,43 +83,40 @@ void init() {
 }
 
 //===============================================================================//
-ll dp[105][1005];
-
-ll solveDP(ll n, ll sum){
-
-    if(n == 0 and sum == 0){
-        return 1;
-    }
-    if(n < 0 || sum < 0){
-        return 0;
-    }
-
-    if(dp[n][sum] != -1){
-        return dp[n][sum];
-    }
-    int ans = 0;
-
-    for(int dig=0; dig<=9; dig++){
-        ans += solveDP(n-1, sum-dig);
-    }
-
-    return dp[n][sum] = ans;
-}
-
-// O(10 * N * K)
 
 void solve(){
-    int n,sum;
-    memset(dp, -1, sizeof dp);
-    cin >> n >> sum;
-    
-    cout << solveDP(n,sum);
+    ll n;
+    cin >> n;
+    vi a(n);
+    rep(i, 0, n) cin >> a[i];
+    vi b(n);
+    b = a;
+    sort(all(b));
+    int cnt = 0;
+    rep(i,0,n){
+        if(a[i] == b[i]){
+            cnt++;
+        }
+    }
+    if(cnt == n){
+        cout << 0 << endl;
+        return;
+    }
+    if(a[0] == 1 || a[n-1] == n){
+        cout << 1 << endl;
+        return;
+    }
+    if(a[0] == n and a[n-1] == 1){
+        cout << 3 << endl;
+        return;
+    }
+    cout << 2 << endl;
 }
 
 int main() {
     init();
     ll test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--) {
         solve();
     }

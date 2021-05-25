@@ -40,11 +40,11 @@ mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count())
 const int M = 1e9 + 7;
 //===============================================================================//
 ll power(ll x, ll y) {
-    ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
+	ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 
 bool isPowerOfTwo(ll x) {
-    return x && (!(x & (x - 1)));   //check if the number is power of two or not
+	return x && (!(x & (x - 1)));   //check if the number is power of two or not
 }
 ll ceil(ll a, ll b) { return (a + b - 1) / b; }
 
@@ -75,53 +75,42 @@ template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_pr
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 
 void init() {
-    fastIO;
+	fastIO;
 #ifdef BHARGAV
-    //freopen("input.txt","r",stdin);
-    //freopen("output.txt","w",stdout);
+	//freopen("input.txt","r",stdin);
+	//freopen("output.txt","w",stdout);
 #endif
 }
 
 //===============================================================================//
-ll dp[105][1005];
 
-ll solveDP(ll n, ll sum){
-
-    if(n == 0 and sum == 0){
-        return 1;
-    }
-    if(n < 0 || sum < 0){
-        return 0;
-    }
-
-    if(dp[n][sum] != -1){
-        return dp[n][sum];
-    }
-    int ans = 0;
-
-    for(int dig=0; dig<=9; dig++){
-        ans += solveDP(n-1, sum-dig);
-    }
-
-    return dp[n][sum] = ans;
-}
-
-// O(10 * N * K)
-
-void solve(){
-    int n,sum;
-    memset(dp, -1, sizeof dp);
-    cin >> n >> sum;
-    
-    cout << solveDP(n,sum);
+void solve() {
+	ll n, k;
+	cin >> n >> k;
+	vl nums(n);
+	rep(i, 0, n) cin >> nums[i];
+	multiset<ll>st;
+	ll curr = 0;
+	ll cnt = 0;
+	for (int i = 0; i < n; i++) {
+		curr += nums[i];
+		if (curr == k) {
+			cnt++;
+		} else {
+			ll diff = curr - k;
+			cnt += st.count(diff);
+		}
+		st.insert(curr);
+	}
+	cout << cnt << endl;
 }
 
 int main() {
-    init();
-    ll test = 1;
-    // cin >> test;
-    while (test--) {
-        solve();
-    }
-    return 0;
+	init();
+	ll test = 1;
+	// cin >> test;
+	while (test--) {
+		solve();
+	}
+	return 0;
 }

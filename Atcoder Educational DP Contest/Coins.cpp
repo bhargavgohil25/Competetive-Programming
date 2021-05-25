@@ -40,11 +40,11 @@ mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count())
 const int M = 1e9 + 7;
 //===============================================================================//
 ll power(ll x, ll y) {
-    ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
+	ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 
 bool isPowerOfTwo(ll x) {
-    return x && (!(x & (x - 1)));   //check if the number is power of two or not
+	return x && (!(x & (x - 1)));   //check if the number is power of two or not
 }
 ll ceil(ll a, ll b) { return (a + b - 1) / b; }
 
@@ -75,53 +75,57 @@ template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_pr
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 
 void init() {
-    fastIO;
+	fastIO;
 #ifdef BHARGAV
-    //freopen("input.txt","r",stdin);
-    //freopen("output.txt","w",stdout);
+	//freopen("input.txt","r",stdin);
+	//freopen("output.txt","w",stdout);
 #endif
 }
 
 //===============================================================================//
-ll dp[105][1005];
 
-ll solveDP(ll n, ll sum){
 
-    if(n == 0 and sum == 0){
-        return 1;
-    }
-    if(n < 0 || sum < 0){
-        return 0;
-    }
+void solve() {
+	ll n;
+	cin >> n;
+	vector<double>a(3001);
+	vector<vector<double>>dp(3001, vector<double>(3001));
+	rep(i, 0, n) {
+		cin >> a[i];
+	}
 
-    if(dp[n][sum] != -1){
-        return dp[n][sum];
-    }
-    int ans = 0;
+	dp[0][0] = (1 - a[0]);  // this means that, at index 0 we have 0 heads, therefore we have probablity of tails
+	dp[0][1] = a[0];        // this means that, at index 0 we have 1 heads, therefore we have probablity of heads
 
-    for(int dig=0; dig<=9; dig++){
-        ans += solveDP(n-1, sum-dig);
-    }
+	for (int i = 1; i < n; i++) {
+		for (int j = 0; j < 3001; j++) {
+			// if it is tails
+			dp[i][j] += (1 - a[i]) * dp[i - 1][j];
+			// what this means is that we wanted j heads and the current coin we got is tails, therefore the probablity
+			// of getting heads upto i-1'th index is what we want to add in the DP
 
-    return dp[n][sum] = ans;
+			// if it is heads
+			if (j > 0) {
+				dp[i][j] += (a[i]) * dp[i - 1][j - 1];
+			}
+			// what this means is that we wanted j heads, and we got head on this toss
+			// so, we will check probablity of j-1 heads
+		}
+	}
+	// debug(dp);
+	double ans = 0;
+	for (int i = (n / 2) + 1; i < 3001; i++) {
+		ans += dp[n - 1][i];
+	}
+	cout << fixed << setprecision(9);
+	cout << ans << endl;
 }
-
-// O(10 * N * K)
-
-void solve(){
-    int n,sum;
-    memset(dp, -1, sizeof dp);
-    cin >> n >> sum;
-    
-    cout << solveDP(n,sum);
-}
-
 int main() {
-    init();
-    ll test = 1;
-    // cin >> test;
-    while (test--) {
-        solve();
-    }
-    return 0;
+	init();
+	ll test = 1;
+	// cin >> test;
+	while (test--) {
+		solve();
+	}
+	return 0;
 }

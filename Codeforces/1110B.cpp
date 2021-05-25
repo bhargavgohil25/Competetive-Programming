@@ -1,4 +1,4 @@
-// Created by ...
+// Created by ... 
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
@@ -83,37 +83,29 @@ void init() {
 }
 
 //===============================================================================//
-ll dp[105][1005];
-
-ll solveDP(ll n, ll sum){
-
-    if(n == 0 and sum == 0){
-        return 1;
-    }
-    if(n < 0 || sum < 0){
-        return 0;
-    }
-
-    if(dp[n][sum] != -1){
-        return dp[n][sum];
-    }
-    int ans = 0;
-
-    for(int dig=0; dig<=9; dig++){
-        ans += solveDP(n-1, sum-dig);
-    }
-
-    return dp[n][sum] = ans;
-}
-
-// O(10 * N * K)
 
 void solve(){
-    int n,sum;
-    memset(dp, -1, sizeof dp);
-    cin >> n >> sum;
-    
-    cout << solveDP(n,sum);
+    ll n,m,k;
+    cin >> n >> m >> k;
+    vi cuts(n);
+    rep(i,0,n){
+    	cin >> cuts[i];
+    }
+
+    vi segs;
+    for(int i=1; i<n; i++){
+    	segs.pb(cuts[i] - cuts[i-1]);
+    }
+    debug(segs);
+    sort(all(segs));
+
+    ll ans = k;
+
+    for(int i=0; i<(n-k); i++){
+    	ans += segs[i];
+    }
+    cout << ans << endl;
+    debug(ans);
 }
 
 int main() {

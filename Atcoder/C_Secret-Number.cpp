@@ -1,4 +1,4 @@
-// Created by ...
+// Created by ... 
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
@@ -83,37 +83,64 @@ void init() {
 }
 
 //===============================================================================//
-ll dp[105][1005];
-
-ll solveDP(ll n, ll sum){
-
-    if(n == 0 and sum == 0){
-        return 1;
-    }
-    if(n < 0 || sum < 0){
-        return 0;
-    }
-
-    if(dp[n][sum] != -1){
-        return dp[n][sum];
-    }
-    int ans = 0;
-
-    for(int dig=0; dig<=9; dig++){
-        ans += solveDP(n-1, sum-dig);
-    }
-
-    return dp[n][sum] = ans;
-}
-
-// O(10 * N * K)
 
 void solve(){
-    int n,sum;
-    memset(dp, -1, sizeof dp);
-    cin >> n >> sum;
-    
-    cout << solveDP(n,sum);
+    string s;
+    cin >> s;
+    map<int,int>mp;
+    for(int i=0; i<10; i++){
+    	if(s[i] == 'o'){
+    		mp[i] = 1;
+    	}else if(s[i] == '?'){
+    		mp[i] = 0;
+    	}else{
+    		mp[i] = -1;
+    	}
+    }
+    debug(mp);
+    // return;
+    int ans = 0;
+    for(int i=0; i<10; i++){
+    	for(int j=0; j<10; j++){
+    		for(int k=0; k<10; k++){
+    			for(int l=0; l<10; l++){
+
+    				string temp = "";
+
+    				temp += char(i + '0');
+    				temp += char(j + '0');
+    				temp += char(k + '0');
+    				temp += char(l + '0');
+
+    				// debug(temp);
+
+    				bool ok = true; // the current temp PIN is valid or not
+
+    				for(int index=0; index<10; index++){
+    					
+    					if(mp[index] == 1){
+
+    						bool here = false; // Checking every character PIN in the map, whether it is present or not....
+
+    						for(int ind=0; ind<4; ind++){
+    							if(temp[ind]- '0' == index){
+    								here = true;
+    							}
+    						}
+
+    						if(!here) ok = false;
+    					}
+    				}
+    				for(int index=0; index<4; index++){
+    					if(mp[temp[index] - '0'] == -1) ok = false;
+    				}
+    				ans += ok;
+    			}
+    		}
+    	}
+    }
+
+    cout << ans << endl;
 }
 
 int main() {

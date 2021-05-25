@@ -1,4 +1,4 @@
-// Created by ...
+// Created by ... 
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
@@ -83,37 +83,48 @@ void init() {
 }
 
 //===============================================================================//
-ll dp[105][1005];
-
-ll solveDP(ll n, ll sum){
-
-    if(n == 0 and sum == 0){
-        return 1;
-    }
-    if(n < 0 || sum < 0){
-        return 0;
-    }
-
-    if(dp[n][sum] != -1){
-        return dp[n][sum];
-    }
-    int ans = 0;
-
-    for(int dig=0; dig<=9; dig++){
-        ans += solveDP(n-1, sum-dig);
-    }
-
-    return dp[n][sum] = ans;
-}
-
-// O(10 * N * K)
 
 void solve(){
-    int n,sum;
-    memset(dp, -1, sizeof dp);
-    cin >> n >> sum;
-    
-    cout << solveDP(n,sum);
+	ll n,m;
+	cin >> n >> m;
+	vector<vector<char>>mat(n,vector<char>(m));
+	vector<vector<int>>dp(n,vector<int>(m,0));
+	rep(i,0,n){
+		rep(j,0,m){
+			cin >> mat[i][j];
+		}
+	}
+
+	for(int i=0; i<n; i++){
+		if(mat[i][0] == '.'){
+			dp[i][0] = 1;
+		}else{
+			dp[i][0] = 0;
+			break;
+		}
+	}
+	for(int i=0; i<m; i++){
+		if(mat[0][i] == '.'){
+			dp[0][i] = 1;
+		}else{
+			dp[0][i] = 0;
+			break;
+		}
+	}
+
+	for(int i=1; i<n; i++){
+		for(int j=1; j<m; j++){
+			if(mat[i][j] != '#'){
+				dp[i][j] = (dp[i-1][j] + dp[i][j-1]) % M;
+			}else{
+				dp[i][j] = 0;
+			}
+		}
+	}
+	debug(dp);
+	cout << dp[n-1][m-1] << endl;
+
+
 }
 
 int main() {

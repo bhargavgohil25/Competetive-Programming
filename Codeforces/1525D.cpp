@@ -40,11 +40,11 @@ mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count())
 const int M = 1e9 + 7;
 //===============================================================================//
 ll power(ll x, ll y) {
-    ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
+	ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 
 bool isPowerOfTwo(ll x) {
-    return x && (!(x & (x - 1)));   //check if the number is power of two or not
+	return x && (!(x & (x - 1)));   //check if the number is power of two or not
 }
 ll ceil(ll a, ll b) { return (a + b - 1) / b; }
 
@@ -75,53 +75,66 @@ template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_pr
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 
 void init() {
-    fastIO;
+	fastIO;
 #ifdef BHARGAV
-    //freopen("input.txt","r",stdin);
-    //freopen("output.txt","w",stdout);
+	//freopen("input.txt","r",stdin);
+	//freopen("output.txt","w",stdout);
 #endif
 }
 
 //===============================================================================//
-ll dp[105][1005];
+const int mx = 5005;
 
-ll solveDP(ll n, ll sum){
+ll dp[mx][mx];
+// vi a1(mx), a0(mx);
+ll a0[mx];
+ll a1[mx];
 
-    if(n == 0 and sum == 0){
-        return 1;
-    }
-    if(n < 0 || sum < 0){
-        return 0;
-    }
+void solve() {
+	ll n;
+	cin >> n;
+	int cnt1 = 0, cnt0 = 0;
+	for (int i = 1; i <= n; i++) {
+		ll t;
+		cin >> t;
+		if (t) {
+			a1[++cnt1] = i;
+		}
+		else {
+			a0[++cnt0] = i;
+		}
+	}
 
-    if(dp[n][sum] != -1){
-        return dp[n][sum];
-    }
-    int ans = 0;
+	for(int i=1; i<=cnt0; i++){
+		dp[0][i] = 0;
+	}
+	for(int i=1; i<=cnt1; i++){
+		dp[i][0] = INT_MAX;
+	}
 
-    for(int dig=0; dig<=9; dig++){
-        ans += solveDP(n-1, sum-dig);
-    }
-
-    return dp[n][sum] = ans;
-}
-
-// O(10 * N * K)
-
-void solve(){
-    int n,sum;
-    memset(dp, -1, sizeof dp);
-    cin >> n >> sum;
-    
-    cout << solveDP(n,sum);
+	for(int i=1; i<=cnt1; i++){
+		for(int j=1; j<=cnt0; j++){
+			dp[i][j] = min(dp[i-1][j-1] + abs(a1[i] - a0[j]) ,dp[i][j-1]);
+		}
+	}
+	cout << dp[cnt1][cnt0] << endl;
+	// for (int i = 1; i <= cnt1; i++) {
+	// 	cout << a1[i] << ' ';
+	// }
+	// cout << endl;
+	// for (int i = 1; i <= cnt0; i++) {
+	// 	cout << a0[i] << ' ';
+	// }
+	// debug(a0);
+	// debug(a1);
 }
 
 int main() {
-    init();
-    ll test = 1;
-    // cin >> test;
-    while (test--) {
-        solve();
-    }
-    return 0;
+	init();
+	ll test = 1;
+	// cin >> test;
+	while (test--) {
+		solve();
+	}
+	return 0;
 }

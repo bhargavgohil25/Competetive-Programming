@@ -1,4 +1,4 @@
-// Created by ...
+// Created by ... 
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
@@ -83,37 +83,42 @@ void init() {
 }
 
 //===============================================================================//
-ll dp[105][1005];
-
-ll solveDP(ll n, ll sum){
-
-    if(n == 0 and sum == 0){
-        return 1;
-    }
-    if(n < 0 || sum < 0){
-        return 0;
-    }
-
-    if(dp[n][sum] != -1){
-        return dp[n][sum];
-    }
-    int ans = 0;
-
-    for(int dig=0; dig<=9; dig++){
-        ans += solveDP(n-1, sum-dig);
-    }
-
-    return dp[n][sum] = ans;
-}
-
-// O(10 * N * K)
-
+// int a[100005][], dp[100005][4];
 void solve(){
-    int n,sum;
-    memset(dp, -1, sizeof dp);
-    cin >> n >> sum;
-    
-    cout << solveDP(n,sum);
+	ll n;
+	cin >> n;
+
+	vector<vector<int>>a(n+1, vector<int>(3));
+	// ll a[n+1][3];
+	for(int i=1; i<=n; i++){
+		for(int j=1; j<=3; j++){
+			cin >> a[i][j];
+		}
+	}
+	// debug(a);
+	vector<vector<int>>dp(n+1, vector<int>(3));
+
+	for(int i=1; i<=3; i++){
+		dp[1][i] = a[1][i];
+	}
+
+	for(int i=2; i<=n; i++){
+
+		for(int j=1; j<=3; j++){
+
+			int maxi = 0;
+
+			for(int k=1; k<=3; k++){
+				if(k != j){
+					maxi = max(maxi, dp[i-1][k]);
+				}
+			}
+
+			dp[i][j] = maxi + a[i][j];
+		}
+	}
+
+	cout << max({ dp[n][1], dp[n][2], dp[n][3] }) << endl;
 }
 
 int main() {

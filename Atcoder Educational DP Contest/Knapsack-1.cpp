@@ -1,4 +1,4 @@
-// Created by ...
+// Created by ... 
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
@@ -83,37 +83,26 @@ void init() {
 }
 
 //===============================================================================//
-ll dp[105][1005];
-
-ll solveDP(ll n, ll sum){
-
-    if(n == 0 and sum == 0){
-        return 1;
-    }
-    if(n < 0 || sum < 0){
-        return 0;
-    }
-
-    if(dp[n][sum] != -1){
-        return dp[n][sum];
-    }
-    int ans = 0;
-
-    for(int dig=0; dig<=9; dig++){
-        ans += solveDP(n-1, sum-dig);
-    }
-
-    return dp[n][sum] = ans;
-}
-
-// O(10 * N * K)
+ll dp[101][100001];
 
 void solve(){
-    int n,sum;
-    memset(dp, -1, sizeof dp);
-    cin >> n >> sum;
-    
-    cout << solveDP(n,sum);
+	ll n,W;
+	cin >> n >> W;
+	vl w(n+1),v(n+1);
+	for(int i=1; i<=n; i++){
+		cin >> w[i] >> v[i];
+	}
+	// memset(dp, 0, sizeof dp);
+	for(int i=1; i<=n; i++){
+		for(int j=1; j<=W; j++){
+			if(j < w[i]) dp[i][j] = dp[i-1][j];   // When we dont take this weight
+			else{
+				dp[i][j] = max(dp[i-1][j], dp[i-1][j - w[i]] + v[i]); // maximum of two option whether to take it or not
+			}
+		}
+	}
+	cout << dp[n][W] << endl;
+
 }
 
 int main() {

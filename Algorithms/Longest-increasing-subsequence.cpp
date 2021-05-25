@@ -1,4 +1,4 @@
-// Created by ...
+// Created by ... 
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
@@ -83,37 +83,50 @@ void init() {
 }
 
 //===============================================================================//
-ll dp[105][1005];
 
-ll solveDP(ll n, ll sum){
+void LongestIncreasingSubsequenceLength(vector<int>& a, ll n){
 
-    if(n == 0 and sum == 0){
-        return 1;
+    // Complexity will be O(nlog n)
+
+    set<ll> potential; // The Current Built LIS
+    potential.insert(a[0]);
+    // Loop through every element
+
+    for(int i=1; i<n; i++){
+        auto get = potential.lower_bound(a[i]);
+
+        // check if there present any element just greter or equal to 
+        // if it is not present insert it 
+        // as it will be the biggest element so far in the potential set...
+
+        if(get == potential.end()){
+            potential.insert(a[i]);
+        }else{
+            ll value = *get;
+            // get the value of that iterator
+
+            if(value > a[i]){
+                // if the element which we inserted is greater
+                // than the current element in the array
+                // then we remove the greater element... from the set
+                // because if the bigger value extends some element..
+                // then it is sure that the lower element will definitely extends it..
+                potential.erase(value);
+                potential.insert(a[i]);
+            }
+        }
     }
-    if(n < 0 || sum < 0){
-        return 0;
-    }
 
-    if(dp[n][sum] != -1){
-        return dp[n][sum];
-    }
-    int ans = 0;
+    // so the final answer will be the size of the potential set
 
-    for(int dig=0; dig<=9; dig++){
-        ans += solveDP(n-1, sum-dig);
-    }
+    cout << potential.size() << endl;
 
-    return dp[n][sum] = ans;
 }
 
-// O(10 * N * K)
+// Not for CSES 
 
-void solve(){
-    int n,sum;
-    memset(dp, -1, sizeof dp);
-    cin >> n >> sum;
-    
-    cout << solveDP(n,sum);
+void LongestIncreasingSubsequence(vector<int>& a, ll n){
+
 }
 
 int main() {
@@ -121,7 +134,16 @@ int main() {
     ll test = 1;
     // cin >> test;
     while (test--) {
-        solve();
+        // Length Input
+        ll n;
+        cin >> n;
+        // Array Input
+        vi a(n);
+        rep(i,0,n) cin >> a[i];
+        // This is just to get the size of Longest Increasing Subsequene
+        LongestIncreasingSubsequenceLength(a,n);
+        // This is to print the elements in Longest Increasing Subsequence
+        LongestIncreasingSubsequence(a,n);
     }
     return 0;
 }

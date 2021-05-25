@@ -1,4 +1,4 @@
-// Created by ...
+// Created by ... 
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
@@ -83,43 +83,41 @@ void init() {
 }
 
 //===============================================================================//
-ll dp[105][1005];
-
-ll solveDP(ll n, ll sum){
-
-    if(n == 0 and sum == 0){
-        return 1;
-    }
-    if(n < 0 || sum < 0){
-        return 0;
-    }
-
-    if(dp[n][sum] != -1){
-        return dp[n][sum];
-    }
-    int ans = 0;
-
-    for(int dig=0; dig<=9; dig++){
-        ans += solveDP(n-1, sum-dig);
-    }
-
-    return dp[n][sum] = ans;
-}
-
-// O(10 * N * K)
 
 void solve(){
-    int n,sum;
-    memset(dp, -1, sizeof dp);
-    cin >> n >> sum;
-    
-    cout << solveDP(n,sum);
+    string s;
+    cin >> s;
+    ll n;
+    n = s.length();
+    ll dp[n][n];
+    // memset(dp, 0, sizeof dp);
+    // string of length == 1 is palindrome
+    for(int i=0; i<n; i++){
+    	dp[i][i] = 1;
+    }
+
+    // 
+    for(int len=2; len<=n; len++){
+    	for(int i=0; i<n-len+1; i++){
+    		int j = i + len - 1;
+    		if(s[i] == s[j] and len == 2){
+    			dp[i][j] = 2;
+    		}
+    		else if(s[i] == s[j]){
+    			dp[i][j] = dp[i+1][j-1] + 2;
+    		}else{
+    			dp[i][j] = max(dp[i][j-1], dp[i+1][j]);
+    		}
+    	}
+    }
+    // Length of the Longest Palindromic Substring
+    cout << dp[0][n-1] << endl;
 }
 
 int main() {
     init();
     ll test = 1;
-    // cin >> test;
+    cin >> test;
     while (test--) {
         solve();
     }

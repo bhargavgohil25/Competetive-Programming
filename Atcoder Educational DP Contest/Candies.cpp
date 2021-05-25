@@ -1,4 +1,4 @@
-// Created by ...
+// Created by ... 
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
@@ -83,37 +83,48 @@ void init() {
 }
 
 //===============================================================================//
-ll dp[105][1005];
-
-ll solveDP(ll n, ll sum){
-
-    if(n == 0 and sum == 0){
-        return 1;
-    }
-    if(n < 0 || sum < 0){
-        return 0;
-    }
-
-    if(dp[n][sum] != -1){
-        return dp[n][sum];
-    }
-    int ans = 0;
-
-    for(int dig=0; dig<=9; dig++){
-        ans += solveDP(n-1, sum-dig);
-    }
-
-    return dp[n][sum] = ans;
-}
-
-// O(10 * N * K)
 
 void solve(){
-    int n,sum;
-    memset(dp, -1, sizeof dp);
-    cin >> n >> sum;
-    
-    cout << solveDP(n,sum);
+    ll n,k;
+    cin >> n >> k;
+    vi a(100);
+    vector<vector<int>>dp(100, vector<int>(100005));
+    rep(i,0,n){
+    	cin >> a[i];
+    }
+
+    // DP states are 
+    // dp[x][y] --> we ae on the x'th index and we have distributed y candies in total...
+    // Now, when we look at the problem it looks easy like we can make a transition of
+    // f(n,k) = f(n-1, k) , f(n-1, k-ai)
+    // But we cant we have to choose any value between 0 -- ai
+    // so we will use the consept prefix sum..
+
+    // dp[x][y] = pref[y] - pref[y - a[x] - 1]
+    // Prefix sum will be of dp[i-1]
+
+    // Intial Condition / Base Condition
+	for(int i=0; i<=a[0]; i++){
+    	dp[0][i] = 1;
+    }
+
+    for(int i=1; i<n; i++){
+    	vector<int>pref(k+1);
+    	pref[0] = dp[i-1][0];
+    	for(int j=1; j<k+1; j++){
+    		pref[j] = (pref[j-1] + dp[i-1][j]) % M;
+    	}
+    	debug(pref);
+    	for(int j=0; j<k+1; j++){
+    		if(j > a[i]){
+    			dp[i][j] = (pref[j] + M - pref[j - a[i] - 1]) % M;
+    		}else{
+    			dp[i][j] = pref[j];
+    		}
+    	}
+    }
+
+    cout << dp[n-1][k] << endl;
 }
 
 int main() {
