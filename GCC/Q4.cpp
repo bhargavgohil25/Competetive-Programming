@@ -89,45 +89,80 @@ void init() {
 //===============================================================================//
 
 void solve(){
-    string s;
-    cin >> s;
+  int n;
+  cin >> n;
+  vector<int> arr(n);
+  rep(i,0,n) cin >> arr[i];
+  vector<pair<int, int>> ngr(n);
 
-    map<char, int>mp;
-
-    for(int i=0; i < s.length() - 2; i++){
-        if(s[i] >= 'a' and s[i] <= 'z'){
-            if(s[i+2] >= 'a' and s[i+2] <= 'z'){
-                mp[s[i]] = mp[s[i]] + (s[i+1] - '0');
-                i++;
-            }else{
-                char a = s[i+1];
-                char b = s[i+2];
-                string c;
-                c = c + a + b;
-                mp[s[i]] = mp[s[i]] + stoi(c);
-                i+=2; 
-            }
-        }
-    }
-    string ans = "";
-
-    for(auto i : mp){
-        char a = i.first;
-        string b = to_string(i.second);
-        ans.push_back(a);
-        ans.push_back(b[0]);
-        if(b[1]) ans.push_back(b[1]);
-        // cout << a << ' ' << b << endl;
+  stack<int> s;
+  s.push(0);
+  
+  // for right
+  for(int i = 1; i < n; i++){
+    
+    if(arr[i] <= arr[s.top()]){
+      s.push(i);
+      continue;
     }
 
-    cout << ans << endl;
+    while(!s.empty() and arr[i] > arr[s.top()]){
+      ngr[s.top()].second = arr[i];
+      s.pop();
+    }
 
+    s.push(i);
+  }
+
+  while(!s.empty()){
+    ngr[s.top()].second = -1;
+    s.pop();
+  }
+  // cout << "size of stack after 1st operation : " << s.size() << endl;
+
+  // for left
+  s.push(n - 1);
+  for(int i = n - 2; i >= 0; i--){
+    
+    if(arr[i] <= arr[s.top()]){
+      s.push(i);
+      continue;
+    }
+
+    while(!s.empty() and arr[i] > arr[s.top()]){
+      ngr[s.top()].first = arr[i];
+      s.pop();
+    }
+
+    s.push(i);
+  }
+
+  while(!s.empty()){
+    ngr[s.top()].first = -1;
+    s.pop();
+  }
+
+  // print both ngr's
+  // for(auto i : ngr) {
+  //   cout << i.first << ' ' << i.second << endl;
+  // }
+
+  int ans = 0;
+  for(auto i : ngr){
+    if(i.first > 0 and i.second > 0){
+      ans += 2; 
+    }else if((i.first > 0 and i.second < 0) || (i.first < 0 and i.second > 0)){
+      ans++;
+    }
+  }
+
+  cout << ans << endl;
 }
 
 int main() {
     init();
     ll test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--) {
         solve();
     }

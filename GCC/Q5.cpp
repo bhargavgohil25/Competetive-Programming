@@ -49,12 +49,13 @@ bool isPowerOfTwo(ll x) {
 ll ceil(ll a, ll b) { return (a + b - 1) / b; }
 
 // Add your debug template here //
+
+
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
 #else
 #define debug(x)
 #endif
-
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -89,45 +90,29 @@ void init() {
 //===============================================================================//
 
 void solve(){
-    string s;
-    cin >> s;
-
-    map<char, int>mp;
-
-    for(int i=0; i < s.length() - 2; i++){
-        if(s[i] >= 'a' and s[i] <= 'z'){
-            if(s[i+2] >= 'a' and s[i+2] <= 'z'){
-                mp[s[i]] = mp[s[i]] + (s[i+1] - '0');
-                i++;
-            }else{
-                char a = s[i+1];
-                char b = s[i+2];
-                string c;
-                c = c + a + b;
-                mp[s[i]] = mp[s[i]] + stoi(c);
-                i+=2; 
-            }
-        }
+  string s;
+  cin >> s;
+  int n = s.length();
+  
+  int maxi = INT_MIN;
+  int curr = 0;
+  for(int i = 0; i < n; i++){
+    if(s[i] == '1') {
+      maxi = max(maxi, curr);
+      curr = 0;
+    }else{
+      curr++;
     }
-    string ans = "";
-
-    for(auto i : mp){
-        char a = i.first;
-        string b = to_string(i.second);
-        ans.push_back(a);
-        ans.push_back(b[0]);
-        if(b[1]) ans.push_back(b[1]);
-        // cout << a << ' ' << b << endl;
-    }
-
-    cout << ans << endl;
-
+  }
+  maxi = max(maxi, curr);
+  cout << (maxi % 2 == 0 ? "B" : "A") << endl;
+  
 }
 
 int main() {
     init();
     ll test = 1;
-    cin >> test;
+    // cin >> test;
     while (test--) {
         solve();
     }

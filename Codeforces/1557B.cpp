@@ -89,38 +89,25 @@ void init() {
 //===============================================================================//
 
 void solve(){
-    string s;
-    cin >> s;
-
-    map<char, int>mp;
-
-    for(int i=0; i < s.length() - 2; i++){
-        if(s[i] >= 'a' and s[i] <= 'z'){
-            if(s[i+2] >= 'a' and s[i+2] <= 'z'){
-                mp[s[i]] = mp[s[i]] + (s[i+1] - '0');
-                i++;
-            }else{
-                char a = s[i+1];
-                char b = s[i+2];
-                string c;
-                c = c + a + b;
-                mp[s[i]] = mp[s[i]] + stoi(c);
-                i+=2; 
-            }
-        }
+  ll n,k;
+  cin >> n >> k;
+  vi a(n);
+  rep(i,0,n) cin >> a[i];
+  vi b = a;
+  sort(all(b));
+  map<ll,ll> mp;
+  rep(i,0,n) mp[b[i]] = i;
+  ll cnt = 1;
+  for(int i = 1; i < n; i++){
+    if(mp[a[i]] - mp[a[i-1]] != 1){
+      cnt++;
     }
-    string ans = "";
-
-    for(auto i : mp){
-        char a = i.first;
-        string b = to_string(i.second);
-        ans.push_back(a);
-        ans.push_back(b[0]);
-        if(b[1]) ans.push_back(b[1]);
-        // cout << a << ' ' << b << endl;
-    }
-
-    cout << ans << endl;
+  }
+  if(cnt <= k){
+    yup;
+  }else{
+    nope;
+  }
 
 }
 
