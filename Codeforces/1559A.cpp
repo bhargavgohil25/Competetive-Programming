@@ -89,38 +89,20 @@ void init() {
 //===============================================================================//
 
 void solve(){
-    string s;
-    cin >> s;
+  int n;
+  cin >> n;
+  vi a(n);
+  rep(i,0,n) cin >> a[i];
+  // and operation on all the elements
+  // if at any bit there is zero ( which we want as it will minimize the ans ) is good
+  // and if not then also no issue as we will get 1 as that bit again
+  int ans = a[0];
 
-    map<char, int>mp;
+  for(int i = 0; i < n ; i++){
+    ans = ans & a[i];
+  }
 
-    for(int i=0; i < s.length() - 2; i++){
-        if(s[i] >= 'a' and s[i] <= 'z'){
-            if(s[i+2] >= 'a' and s[i+2] <= 'z'){
-                mp[s[i]] = mp[s[i]] + (s[i+1] - '0');
-                i++;
-            }else{
-                char a = s[i+1];
-                char b = s[i+2];
-                string c;
-                c = c + a + b;
-                mp[s[i]] = mp[s[i]] + stoi(c);
-                i+=2; 
-            }
-        }
-    }
-    string ans = "";
-
-    for(auto i : mp){
-        char a = i.first;
-        string b = to_string(i.second);
-        ans.push_back(a);
-        ans.push_back(b[0]);
-        if(b[1]) ans.push_back(b[1]);
-        // cout << a << ' ' << b << endl;
-    }
-
-    cout << ans << endl;
+  cout << ans << endl;
 
 }
 

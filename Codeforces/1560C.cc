@@ -88,40 +88,55 @@ void init() {
 
 //===============================================================================//
 
+ll next_perf(ll N){
+  ll nextN = floor(sqrt(N)) + 1;
+  return nextN * nextN;
+}
+
+bool isPerfectSquare(long double x){
+  if (x >= 0) {
+    long long sr = sqrt(x);
+    return (sr * sr == x);
+  }
+  return false;
+}
+
 void solve(){
-    string s;
-    cin >> s;
-
-    map<char, int>mp;
-
-    for(int i=0; i < s.length() - 2; i++){
-        if(s[i] >= 'a' and s[i] <= 'z'){
-            if(s[i+2] >= 'a' and s[i+2] <= 'z'){
-                mp[s[i]] = mp[s[i]] + (s[i+1] - '0');
-                i++;
-            }else{
-                char a = s[i+1];
-                char b = s[i+2];
-                string c;
-                c = c + a + b;
-                mp[s[i]] = mp[s[i]] + stoi(c);
-                i+=2; 
-            }
-        }
+  ll n;
+  cin >> n;
+  ll m = next_perf(n);
+  if(isPerfectSquare(n)){
+    m = n;
+  }
+  ll a = 0,b = 0;
+  ll cnt = 1;
+  bool found = false;
+  for(int i = m; i > m - sqrt(m); i--){
+    // cout << i << ' ';
+    if(i == n){
+      a = sqrt(m);
+      b = cnt;
+      found = true;
+      break;
     }
-    string ans = "";
+    cnt++;
+  }   
 
-    for(auto i : mp){
-        char a = i.first;
-        string b = to_string(i.second);
-        ans.push_back(a);
-        ans.push_back(b[0]);
-        if(b[1]) ans.push_back(b[1]);
-        // cout << a << ' ' << b << endl;
+  cnt = sqrt(m);
+
+  if(!found){
+    for(int i = m - sqrt(m) + 1; i > (m - sqrt(m) + 1) - sqrt(m); i--){
+      // cout << i << ' ';
+      if(i == n){
+        a = cnt;
+        b = sqrt(m);
+        break;
+      }
+      cnt--;
     }
+  }
 
-    cout << ans << endl;
-
+  cout << a << ' ' << b << endl;
 }
 
 int main() {

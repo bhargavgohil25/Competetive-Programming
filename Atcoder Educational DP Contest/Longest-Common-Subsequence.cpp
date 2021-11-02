@@ -40,21 +40,22 @@ mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count())
 const int M = 1e9 + 7;
 //===============================================================================//
 ll power(ll x, ll y) {
-    ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
+		ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 
 bool isPowerOfTwo(ll x) {
-    return x && (!(x & (x - 1)));   //check if the number is power of two or not
+		return x && (!(x & (x - 1)));   //check if the number is power of two or not
 }
 ll ceil(ll a, ll b) { return (a + b - 1) / b; }
 
 // Add your debug template here //
+
+
 #ifndef ONLINE_JUDGE
 #define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
 #else
 #define debug(x)
 #endif
-
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
 void _print(string t) {cerr << t;}
@@ -75,14 +76,19 @@ template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_pr
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 
 void init() {
-    fastIO;
-#ifdef BHARGAV
-    //freopen("input.txt","r",stdin);
-    //freopen("output.txt","w",stdout);
-#endif
+	fastIO;
+// #ifdef BHARGAV
+//     freopen("input.txt","r",stdin);
+//     freopen("output.txt","w",stdout);
+// #endif
+	#ifndef ONLINE_JUDGE
+		freopen("input.txt", "r", stdin);
+		freopen("output.txt", "w", stdout);
+	#endif
 }
 
 //===============================================================================//
+
 
 vector<vector<int>>dp(3001, vector<int>(3001));
 vector<vector<int>>choice(3001, vector<int>(3001));
@@ -154,15 +160,15 @@ void solve(){
 	}
 	reverse(ans.begin(), ans.end());
 	cout << ans << endl;
-	// cout << dp[n-1][m-1] << endl;
+	cout << dp[n-1][m-1] << endl;
 }
 
 int main() {
-    init();
-    ll test = 1;
-    // cin >> test;
-    while (test--) {
-        solve();
-    }
-    return 0;
+	init();
+	ll test = 1;
+	// cin >> test;
+	while (test--) {
+		solve();
+	}
+	return 0;
 }

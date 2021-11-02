@@ -89,39 +89,57 @@ void init() {
 //===============================================================================//
 
 void solve(){
-    string s;
-    cin >> s;
+  int n;
+  cin >> n;
+  string s;
+  cin >> s;
 
-    map<char, int>mp;
+  int pivot = -1;
 
-    for(int i=0; i < s.length() - 2; i++){
-        if(s[i] >= 'a' and s[i] <= 'z'){
-            if(s[i+2] >= 'a' and s[i+2] <= 'z'){
-                mp[s[i]] = mp[s[i]] + (s[i+1] - '0');
-                i++;
-            }else{
-                char a = s[i+1];
-                char b = s[i+2];
-                string c;
-                c = c + a + b;
-                mp[s[i]] = mp[s[i]] + stoi(c);
-                i+=2; 
-            }
-        }
+  for (int i = 0; i < n; i++){
+		if (s[i] != '?') {
+			pivot = i;
+			break;
+		}
+	}
+
+  // cout << pivot << endl;
+  if(pivot == -1){
+    for(int i = 0; i < n; i++){
+      cout << (i % 2 == 0 ? 'R' : 'B'); 
     }
-    string ans = "";
+    cout << endl;
+    return;
+  }
 
-    for(auto i : mp){
-        char a = i.first;
-        string b = to_string(i.second);
-        ans.push_back(a);
-        ans.push_back(b[0]);
-        if(b[1]) ans.push_back(b[1]);
-        // cout << a << ' ' << b << endl;
+  int left_hook = pivot - 1;
+
+  for(int i = left_hook; i >= 0; i--){
+    // cout << i << ' ';
+    if(s[i] == '?'){
+      if(s[i + 1] == 'R'){
+        s[i] = 'B';
+      }else{
+        s[i] = 'R';
+      }
     }
+  }
 
-    cout << ans << endl;
 
+  int right_hook = pivot + 1;
+
+  for(int i = right_hook; i < n; i++){
+    // cout << i << ' ';
+    if(s[i] == '?'){
+      if(s[i - 1] == 'R'){
+        s[i] = 'B';
+      }else{
+        s[i] = 'R';
+      }
+    }
+  }
+
+  cout << s << endl;
 }
 
 int main() {
