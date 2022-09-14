@@ -141,7 +141,6 @@ int main() {
     while (test--) {
     	cin >> N >> q;
 
-
     	rep(i,1,N+1){
     		cin >> arr[i];
     		update(i,arr[i]);

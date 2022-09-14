@@ -5,7 +5,6 @@ public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
     	int set_size = nums.size();
     	vector<strings> list;
-    	vector<vector<>>
     	int counter,j;
     	for(counter=0;counter<pow(2,set_size);counter++){
     		string subset = "";

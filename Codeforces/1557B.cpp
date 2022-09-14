@@ -88,21 +88,51 @@ void init() {
 
 //===============================================================================//
 
+/*
+  here we are making sure that to numbers in the sorted array are always remain
+  together....
+
+  6 3 4 2 1
+
+  1 2 3 4 6 ---> sorted
+  0 1 2 3 4 ---> indexes assigned
+
+  now se if 3 and 6 are together in the sorted array
+  no, they are apart from 2 distance i.e 4 - 2
+
+  if so, we can make a part over there...
+  next is, 3 4... we can see that they are together in the sorted array
+  therefore we will continue... and thats how we can check and count
+
+
+  and compare it with k if parts <= k then its possible other wise its not possible
+  
+
+
+*/
+
 void solve(){
   ll n,k;
   cin >> n >> k;
   vi a(n);
+
   rep(i,0,n) cin >> a[i];
+  
   vi b = a;
+  
   sort(all(b));
+  
   map<ll,ll> mp;
+  
   rep(i,0,n) mp[b[i]] = i;
   ll cnt = 1;
+  
   for(int i = 1; i < n; i++){
-    if(mp[a[i]] - mp[a[i-1]] != 1){
+    if(mp[a[i]] - mp[a[i-1]] != 1) {
       cnt++;
     }
   }
+  
   if(cnt <= k){
     yup;
   }else{

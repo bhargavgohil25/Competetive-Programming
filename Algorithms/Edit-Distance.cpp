@@ -105,7 +105,7 @@ int solveDP(int i, int j, string &s, string &p){
 		return dp[i][j];
 	}
 
-
+// I just confirmed this thing from my old friend
 	int ans;
 	if(s[i] == p[j]) { // no when both the characters are same we cant do anything we just want to return from there
 		// or go to the next charcters..

@@ -1,4 +1,4 @@
-// Created by ... 
+// Created by ...
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
@@ -40,11 +40,11 @@ mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count())
 const int M = 1e9 + 7;
 //===============================================================================//
 ll power(ll x, ll y) {
-    ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
+  ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 
 bool isPowerOfTwo(ll x) {
-    return x && (!(x & (x - 1)));   //check if the number is power of two or not
+  return x && (!(x & (x - 1)));   //check if the number is power of two or not
 }
 ll ceil(ll a, ll b) { return (a + b - 1) / b; }
 
@@ -76,60 +76,34 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 void init() {
   fastIO;
-// #ifdef BHARGAV
-//     freopen("input.txt","r",stdin);
-//     freopen("output.txt","w",stdout);
-// #endif
-  #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-  #endif
+#ifdef ONLINE_JUDGE
+  //freopen("input.txt","r",stdin);
+  //freopen("output.txt","w",stdout);
+#endif
 }
 
 //===============================================================================//
 
-void solve(){
-    string s;
-    cin >> s;
+std :: string recursive_string_reverse ( std :: string str ) {
+  if ( str.size () <= 1) {
+    return str ;
+  }
+  std :: string first_char ( 1 , str [ 0 ] ) ;
+  std :: string last_chars ( str.substr ( 1 )) ;
+  // MISSING LINE
+  return last_chars + first_char;
+}
 
-    map<char, int>mp;
-
-    for(int i=0; i < s.length() - 2; i++){
-        if(s[i] >= 'a' and s[i] <= 'z'){
-            if(s[i+2] >= 'a' and s[i+2] <= 'z'){
-                mp[s[i]] = mp[s[i]] + (s[i+1] - '0');
-                i++;
-            }else{
-                char a = s[i+1];
-                char b = s[i+2];
-                string c;
-                c = c + a + b;
-                mp[s[i]] = mp[s[i]] + stoi(c);
-                i+=2; 
-            }
-        }
-    }
-    string ans = "";
-
-    for(auto i : mp){
-        char a = i.first;
-        string b = to_string(i.second);
-        ans.push_back(a);
-        ans.push_back(b[0]);
-        if(b[1]) ans.push_back(b[1]);
-        // cout << a << ' ' << b << endl;
-    }
-
-    cout << ans << endl;
-
+void solve() {
+  cout << recursive_string_reverse("Bhargav") << endl;
 }
 
 int main() {
-    init();
-    ll test = 1;
-    cin >> test;
-    while (test--) {
-        solve();
-    }
-    return 0;
+  init();
+  ll test = 1;
+  // cin >> test;
+  while (test--) {
+    solve();
+  }
+  return 0;
 }
