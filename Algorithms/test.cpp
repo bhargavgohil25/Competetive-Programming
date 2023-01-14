@@ -26,7 +26,7 @@ typedef vector<vl> vvl;
 mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 ll power(ll x, ll y) {
-  ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
+	ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
@@ -48,26 +48,76 @@ template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_pr
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 
 void init() {
-  fastIO;
-  #ifndef ONLINE_JUDGE
-  #define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
-  #else
-  #define debug(x)
-  #endif
+	fastIO;
+#ifndef ONLINE_JUDGE
+#define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
+#else
+#define debug(x)
+#endif
 }
 
 //===============================================================================//
+int findPeakElement(vector<int>& nums) {
+	int low = 0;
 
-void solve(){
-  
+	int high = nums.size() - 1;
+	if (nums.size() == 1) {
+		return 0;
+	}
+	while (low <= high) {
+
+		int mid = low + (high - low) / 2;
+
+		if (mid > 0 && mid < nums.size() - 1) {
+			if (nums[mid] > nums[mid + 1] && nums[mid] > nums[mid - 1]) {
+				return mid;
+			}
+			else if (nums[mid] < nums[mid + 1] && nums[mid] > nums[mid - 1]) {
+				low = mid + 1;
+			}
+			else if (nums[mid] > nums[mid + 1] && nums[mid] < nums[mid - 1]) {
+				high = mid - 1;
+			}
+			else {
+				high = mid - 1;
+			}
+		}
+		else if (mid == 0) {
+			if (nums[0] > nums[1]) {
+				return 0;
+			}
+			else {
+				return 1;
+			}
+		}
+		else if (mid == nums.size() - 1) {
+			if (nums[nums.size() - 1] > nums[nums.size() - 2]) {
+				return nums.size() - 1;
+
+			}
+			else {
+				return nums.size() - 2;
+			}
+		}
+	}
+	return -1;
+}
+
+void solve() {
+	int n;
+	cin >> n;
+	vector<int> a(n);
+	for (auto &i : a) cin >> i;
+	int ind = findPeakElement(a);
+	cout << a[ind] << ' ';
 }
 
 int main() {
-  init();
-  ll test = 1;
-  cin >> test;
-  while (test--) {
-    solve();
-  }
-  return 0;
+	init();
+	ll test = 1;
+	// cin >> test;
+	while (test--) {
+		solve();
+	}
+	return 0;
 }

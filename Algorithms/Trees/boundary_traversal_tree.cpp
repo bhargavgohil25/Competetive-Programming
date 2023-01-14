@@ -17,25 +17,40 @@ public:
      * @param root: a TreeNode
      * @return: a list of integer
      */
-    void getLeftNodes(TreeNode* root, vector<int>& ans){
-        if(root->left == NULL and root->right == NULL) {
+    void getLeftNodes(TreeNode* root, vector<int>& ans) {
+        if (root->left == NULL and root->right == NULL) {
             return;
         }
 
         ans.push_back(root->val);
-        if(root->left != NULL and (root->left->left or root->left->right)){
+
+        if (root->left != NULL and (root->left->left or root->left->right)) {
             getLeftNodes(root->left, ans);
         }
-        if(root->left == NULL and root->right != NULL) {
+        if (root->left == NULL and root->right != NULL) {
             getLeftNodes(root->right, ans);
         }
 
     }
 
-    void getLeafNodes(TreeNode* root, vector<int>& ans) {
-        if(root == NULL) return;
 
-        if(root->left == NULL and root->right == NULL) {
+    void getRightNodes(TreeNode* root, vector<int>& ans) {
+        if (root->left == NULL and root->right == NULL) {
+            return;
+        }
+        ans.push_back(root->val);
+        if (root->right != NULL and (root->right->right or root->right->left)) {
+            getRightNodes(root->right, ans);
+        }
+        if (root->right == NULL and root->left != NULL) {
+            getRightNodes(root->left, ans);
+        }
+    }
+
+    void getLeafNodes(TreeNode* root, vector<int>& ans) {
+        if (root == NULL) return;
+
+        if (root->left == NULL and root->right == NULL) {
             ans.push_back(root->val);
         }
 
@@ -43,25 +58,12 @@ public:
         getLeafNodes(root->right, ans);
     }
 
-    void getRightNodes(TreeNode* root, vector<int>& ans) {
-        if(root->left == NULL and root->right == NULL) {
-            return;
-        }
-        ans.push_back(root->val);
-        if(root->right != NULL and (root->right->right or root->right->left)) {
-            getRightNodes(root->right, ans);
-        }
-        if(root->right == NULL and root->left != NULL) {
-            getRightNodes(root->left, ans);
-        }
-    }
-
     vector<int> boundaryOfBinaryTree(TreeNode * root) {
         // write your code here
         vector<int> ans;
         vector<int> forRight;
 
-        if(root == NULL) return ans;
+        if (root == NULL) return ans;
 
         ans.push_back(root->val);
         // get the left boundary without leafs

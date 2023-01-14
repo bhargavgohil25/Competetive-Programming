@@ -1,6 +1,6 @@
 // Kahn's Algorithm
 
-class Topological - sort - BFS {
+class Topological_sort_BFS {
 public:
     vector<int> topologicalSortBFS(int N, vector<int> adj[]) {
         vector<int> indegree(N, 0);

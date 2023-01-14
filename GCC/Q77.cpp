@@ -49,23 +49,69 @@ template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i
 
 void init() {
   fastIO;
-  #ifndef ONLINE_JUDGE
-  #define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
-  #else
-  #define debug(x)
-  #endif
+#ifndef ONLINE_JUDGE
+#define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
+#else
+#define debug(x)
+#endif
 }
 
 //===============================================================================//
 
-void solve(){
-  
+bool checkForCycle(int node, vector<vector<int>>& adj, vector<int>& vis, vector<int>& dfs_check_vis) {
+  vis[node] = 1;
+  dfs_check_vis[node] = 1;
+
+  for (auto it : adj[node]) {
+    // if(it == node) return false;
+    if (vis[it] == 0) {
+      // if it contains cycle return true
+      if (checkForCycle(it, adj, vis, dfs_check_vis)) {
+        return true;
+      }
+    } else if (dfs_check_vis[it]) {
+      return true;
+    }
+  }
+  // after every dfs done. mark the root node as not done
+  // and return false
+  dfs_check_vis[node] = 0;
+  return false;
+}
+
+void solve() {
+  int n, m;
+  cin >> n >> m;
+
+  vector<vector<int>> adj(n);
+  // Build adjancency list
+  for (int i = 0; i < m; i++) {
+    int a, b;
+    cin >> a >> b;
+    if (a == b) continue;
+    adj[a].push_back(b);
+  }
+
+  // debug(adj);
+
+  vector<int> vis(n, 0), dfs_check_vis(n, 0);
+
+  for (int i = 0; i < n; i++) {
+    if (vis[i] == 0) {
+      if (checkForCycle(i, adj, vis, dfs_check_vis)) {
+        cout << "Ineligible" << endl;
+        return;
+      }
+    }
+  }
+
+  cout << "Eligible" << endl;
 }
 
 int main() {
   init();
   ll test = 1;
-  cin >> test;
+  // cin >> test;
   while (test--) {
     solve();
   }

@@ -1,6 +1,6 @@
 class Solution {
 
-  bool checkForCycle(int node, int vis[], int dfsVis[]) {
+  bool checkForCycle(int node, vector<vector<int>>& adj, int vis[], int dfsVis[]) {
     vis[node] = 1;
     dfsVis[node] = 1;
 
@@ -17,7 +17,6 @@ class Solution {
     dfsVis[node] = 0;
     return false;
   }
-
 
 public:
   bool isCyclic(int N, vector<int> adj[]) {

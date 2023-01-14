@@ -1,4 +1,4 @@
-// Created by ... 
+// Created by ...
 #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
@@ -40,11 +40,11 @@ mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count())
 const int M = 1e9 + 7;
 //===============================================================================//
 ll power(ll x, ll y) {
-    ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
+	ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 
 bool isPowerOfTwo(ll x) {
-    return x && (!(x & (x - 1)));   //check if the number is power of two or not
+	return x && (!(x & (x - 1)));   //check if the number is power of two or not
 }
 ll ceil(ll a, ll b) { return (a + b - 1) / b; }
 
@@ -75,41 +75,42 @@ template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_pr
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 
 void init() {
-    fastIO;
+	fastIO;
 #ifdef BHARGAV
-    //freopen("input.txt","r",stdin);
-    //freopen("output.txt","w",stdout);
+	//freopen("input.txt","r",stdin);
+	//freopen("output.txt","w",stdout);
 #endif
 }
 
 //===============================================================================//
 
-void solve(){
+void solve() {
 	ll n;
 	cin >> n;
-	vi h(n+1);
-	rep(i,1,n+1){
+	vector<int> h(n + 1);
+	rep(i, 1, n + 1) {
 		cin >> h[i];
 	}
-	vi dp(n+1);
+
+	vector<int> dp(n + 1);
 	dp[1] = 0;
 	dp[2] = abs(h[1] - h[2]);
 	// dp[3] = abs(h[2] - h[3]);
 
-	for(int i=3; i<=n; i++){
-		dp[i] = min(dp[i-1] + abs(h[i] - h[i-1]) , dp[i-2] + abs(h[i] - h[i-2]));
+	for (int i = 3; i <= n; i++) {
+		dp[i] = min(dp[i - 1] + abs(h[i] - h[i - 1]) , dp[i - 2] + abs(h[i] - h[i - 2]));
 	}
-	debug(dp);
+	// debug(dp);
 	cout << dp[n] << endl;
 
 }
 
 int main() {
-    init();
-    ll test = 1;
-    // cin >> test;
-    while (test--) {
-        solve();
-    }
-    return 0;
+	init();
+	ll test = 1;
+	// cin >> test;
+	while (test--) {
+		solve();
+	}
+	return 0;
 }

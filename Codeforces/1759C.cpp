@@ -26,7 +26,7 @@ typedef vector<vl> vvl;
 mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 ll power(ll x, ll y) {
-  ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
+	ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
@@ -48,26 +48,50 @@ template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_pr
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 
 void init() {
-  fastIO;
-  #ifndef ONLINE_JUDGE
-  #define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
-  #else
-  #define debug(x)
-  #endif
+	fastIO;
+#ifndef ONLINE_JUDGE
+#define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
+#else
+#define debug(x)
+#endif
 }
 
 //===============================================================================//
 
-void solve(){
-  
+void solve() {
+	int l, r, x, a, b;
+	cin >> l >> r >> x >> a >> b;
+
+
+	if (a == b) {
+		cout << 0 << endl;
+		return;
+	}
+
+	if (((a + x) > r and (a - x) < l || ((b + x) > r) and (b - x) < l)) {
+		cout << -1 << endl;
+		return;
+	}
+
+	if (abs(b - a) >= x) {
+		cout << 1 << endl;
+		return;
+	}
+
+	if (((a + x) <= r and (b + x) <= r) || ((a - x) >= l and (b - x) >= l)) {
+		cout << 2 << endl;
+		return;
+	}
+
+	cout << 3 << endl;
 }
 
 int main() {
-  init();
-  ll test = 1;
-  cin >> test;
-  while (test--) {
-    solve();
-  }
-  return 0;
+	init();
+	ll test = 1;
+	cin >> test;
+	while (test--) {
+		solve();
+	}
+	return 0;
 }

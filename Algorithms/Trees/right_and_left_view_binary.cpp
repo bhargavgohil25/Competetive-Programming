@@ -13,34 +13,34 @@ class Solution {
 public:
 
     void getRightView(TreeNode* root, vector<int>& ans, int level) {
-        if(root == NULL) return;
+        if (root == NULL) return;
 
-        if(level == ans.size()) {
+        if (level == ans.size()) {
             ans.push_back(root->val);
         }
-
+        // for getting right view first recurse right than left
         getRightView(root->right, ans, level + 1);
         getRightView(root->left,  ans, level + 1);
-        
+
     }
 
     void getLeftView(TreeNode* root, vector<int>& ans, int level) {
-        if(root == NULL) return;
+        if (root == NULL) return;
 
-        if(level == ans.size()) {
+        if (level == ans.size()) {
             ans.push_back(root->val);
         }
-
+        // for getting right view first recurse left than right
         getLeftView(root->left,  ans, level + 1);
         getLeftView(root->right, ans, level + 1);
-    }    
+    }
 
     vector<int> rightAndLeftViewTree(TreeNode* root) {
-        
+
         /*
             for right view:
 
-            The main idea here is that we need to know the value of the 
+            The main idea here is that we need to know the value of the
             last node in every level
 
             for left view:
@@ -48,13 +48,13 @@ public:
             first node in every level
 
             so, the main point here is that the size of the ans will be equal to number of levels in bin tree.
-    
+
             we will use a recursive solution for this...
         */
 
         vector<int> ans;
 
-        /* 
+        /*
             use any function you need
         */
         getRightView(root, ans, 0);

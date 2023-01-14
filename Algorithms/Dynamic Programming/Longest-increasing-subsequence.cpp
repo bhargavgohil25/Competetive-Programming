@@ -95,8 +95,8 @@ void LongestIncreasingSubsequenceLength(vector<int>& a, ll n){
     for(int i=1; i<n; i++){
         auto get = potential.lower_bound(a[i]);
 
-        // check if there present any element just greter or equal to 
-        // if it is not present insert it 
+        // check if there present any element just greter or equal to itself
+        // if it is not present insert the current element 
         // as it will be the biggest element so far in the potential set...
 
         if(get == potential.end()){

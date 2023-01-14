@@ -26,7 +26,7 @@ typedef vector<vl> vvl;
 mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 
 ll power(ll x, ll y) {
-  ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
+	ll v = 1; while (y > 0) { if (y & 1)v = v * x; y = y >> 1; x = x * x;} return v;
 }
 void _print(ll t) {cerr << t;}
 void _print(int t) {cerr << t;}
@@ -48,26 +48,57 @@ template <class T> void _print(multiset <T> v) {cerr << "[ "; for (T i : v) {_pr
 template <class T, class V> void _print(map <T, V> v) {cerr << "[ "; for (auto i : v) {_print(i); cerr << " ";} cerr << "]";}
 
 void init() {
-  fastIO;
-  #ifndef ONLINE_JUDGE
-  #define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
-  #else
-  #define debug(x)
-  #endif
+	fastIO;
+#ifndef ONLINE_JUDGE
+#define debug(x) cerr << #x <<" "; _print(x); cerr << endl;
+#else
+#define debug(x)
+#endif
 }
 
 //===============================================================================//
 
-void solve(){
-  
+void solve() {
+	ll n, m;
+	cin >> n >> m;
+	ll count_2 = 0, count_5 = 0;
+	ll k = 1;
+	ll num = n;
+
+	while (n and n % 2 == 0) {
+		count_2++;
+		n /= 2;
+	}
+	while (n and n % 5 == 0) {
+		count_5++;
+		n /= 5;
+	}
+	while (count_2 < count_5 and k * 2 <= m) {
+		count_2++;
+		k *= 2;
+	}
+	while (count_5 < count_2 and k * 5 <= m) {
+		count_5++;
+		k *= 5;
+	}
+	while (k * 10 <= m) {
+		k *= 10;
+	}
+
+	if (k == 1) {
+		cout << num * m << endl;
+	} else {
+		k = k * (m / k);
+		cout << num * k << endl;
+	}
 }
 
 int main() {
-  init();
-  ll test = 1;
-  cin >> test;
-  while (test--) {
-    solve();
-  }
-  return 0;
+	init();
+	ll test = 1;
+	cin >> test;
+	while (test--) {
+		solve();
+	}
+	return 0;
 }

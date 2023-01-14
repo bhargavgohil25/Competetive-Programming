@@ -1,0 +1,262 @@
+Enter Board Size
+Enter no of snakes
+Enter head and tail for snake 1: 62 5
+Enter head and tail for snake 2: 33 6
+Enter head and tail for snake 3: 49 9
+Enter head and tail for snake 4: 88 16
+Enter head and tail for snake 5: 41 20
+Enter head and tail for snake 6: 56 53
+Enter head and tail for snake 7: 98 64
+Enter head and tail for snake 8: 93 73
+Enter head and tail for snake 9: 95 75
+Enter no of ladders
+Enter head and tail for ladder 1: 2 37
+Enter head and tail for ladder 2: 27 46
+Enter head and tail for ladder 3: 10 32
+Enter head and tail for ladder 4: 51 68
+Enter head and tail for ladder 5: 61 79
+Enter head and tail for ladder 6: 65 84
+Enter head and tail for ladder 7: 71 91
+Enter head and tail for ladder 8: 81 100
+Enter no of players(at least 2):
+Enter name of player 1: Gaurav 
+Enter name of player 2: Sagar 
+Enter no of dice: 1
+Dice Value: 5
+Gaurav rolled a 5 and moved from 0 to 5
+Dice Value: 6
+Sagar rolled a 6 and moved from 0 to 6
+Dice Value: 6
+Gaurav rolled a 6 and moved from 5 to 11
+Dice Value: 5
+Sagar rolled a 5 and moved from 6 to 11
+Dice Value: 6
+Gaurav rolled a 6 and moved from 11 to 17
+Dice Value: 1
+Sagar rolled a 1 and moved from 11 to 12
+Dice Value: 2
+Gaurav rolled a 2 and moved from 17 to 19
+Dice Value: 2
+Sagar rolled a 2 and moved from 12 to 14
+Dice Value: 1
+Gaurav rolled a 1 and moved from 19 to 20
+Dice Value: 2
+Sagar rolled a 2 and moved from 14 to 16
+Dice Value: 2
+Gaurav rolled a 2 and moved from 20 to 22
+Dice Value: 6
+Sagar rolled a 6 and moved from 16 to 22
+Dice Value: 2
+Gaurav rolled a 2 and moved from 22 to 24
+Dice Value: 2
+Sagar rolled a 2 and moved from 22 to 24
+Dice Value: 5
+Gaurav rolled a 5 and moved from 24 to 29
+Dice Value: 3
+Sagar rolled a 3 and moved from 24 to 46
+Dice Value: 6
+Gaurav rolled a 6 and moved from 29 to 35
+Dice Value: 1
+Sagar rolled a 1 and moved from 46 to 47
+Dice Value: 2
+Gaurav rolled a 2 and moved from 35 to 37
+Dice Value: 4
+Sagar rolled a 4 and moved from 47 to 68
+Dice Value: 4
+Gaurav rolled a 4 and moved from 37 to 20
+Dice Value: 1
+Sagar rolled a 1 and moved from 68 to 69
+Dice Value: 6
+Gaurav rolled a 6 and moved from 20 to 26
+Dice Value: 2
+Sagar rolled a 2 and moved from 69 to 91
+Dice Value: 4
+Gaurav rolled a 4 and moved from 26 to 30
+Dice Value: 6
+Sagar rolled a 6 and moved from 91 to 97
+Dice Value: 5
+Gaurav rolled a 5 and moved from 30 to 35
+Dice Value: 1
+Sagar rolled a 1 and moved from 97 to 64
+Dice Value: 1
+Gaurav rolled a 1 and moved from 35 to 36
+Dice Value: 3
+Sagar rolled a 3 and moved from 64 to 67
+Dice Value: 2
+Gaurav rolled a 2 and moved from 36 to 38
+Dice Value: 2
+Sagar rolled a 2 and moved from 67 to 69
+Dice Value: 5
+Gaurav rolled a 5 and moved from 38 to 43
+Dice Value: 5
+Sagar rolled a 5 and moved from 69 to 74
+Dice Value: 2
+Gaurav rolled a 2 and moved from 43 to 45
+Dice Value: 2
+Sagar rolled a 2 and moved from 74 to 76
+Dice Value: 5
+Gaurav rolled a 5 and moved from 45 to 50
+Dice Value: 6
+Sagar rolled a 6 and moved from 76 to 82
+Dice Value: 6
+Gaurav rolled a 6 and moved from 50 to 53
+Dice Value: 6
+Sagar rolled a 6 and moved from 82 to 16
+Dice Value: 6
+Gaurav rolled a 6 and moved from 53 to 59
+Dice Value: 6
+Sagar rolled a 6 and moved from 16 to 22
+Dice Value: 3
+Gaurav rolled a 3 and moved from 59 to 5
+Dice Value: 4
+Sagar rolled a 4 and moved from 22 to 26
+Dice Value: 3
+Gaurav rolled a 3 and moved from 5 to 8
+Dice Value: 2
+Sagar rolled a 2 and moved from 26 to 28
+Dice Value: 3
+Gaurav rolled a 3 and moved from 8 to 11
+Dice Value: 1
+Sagar rolled a 1 and moved from 28 to 29
+Dice Value: 6
+Gaurav rolled a 6 and moved from 11 to 17
+Dice Value: 4
+Sagar rolled a 4 and moved from 29 to 6
+Dice Value: 2
+Gaurav rolled a 2 and moved from 17 to 19
+Dice Value: 4
+Sagar rolled a 4 and moved from 6 to 32
+Dice Value: 2
+Gaurav rolled a 2 and moved from 19 to 21
+Dice Value: 4
+Sagar rolled a 4 and moved from 32 to 36
+Dice Value: 1
+Gaurav rolled a 1 and moved from 21 to 22
+Dice Value: 5
+Sagar rolled a 5 and moved from 36 to 20
+Dice Value: 2
+Gaurav rolled a 2 and moved from 22 to 24
+Dice Value: 2
+Sagar rolled a 2 and moved from 20 to 22
+Dice Value: 4
+Gaurav rolled a 4 and moved from 24 to 28
+Dice Value: 1
+Sagar rolled a 1 and moved from 22 to 23
+Dice Value: 3
+Gaurav rolled a 3 and moved from 28 to 31
+Dice Value: 6
+Sagar rolled a 6 and moved from 23 to 29
+Dice Value: 3
+Gaurav rolled a 3 and moved from 31 to 34
+Dice Value: 6
+Sagar rolled a 6 and moved from 29 to 35
+Dice Value: 4
+Gaurav rolled a 4 and moved from 34 to 38
+Dice Value: 6
+Sagar rolled a 6 and moved from 35 to 20
+Dice Value: 3
+Gaurav rolled a 3 and moved from 38 to 20
+Dice Value: 2
+Sagar rolled a 2 and moved from 20 to 22
+Dice Value: 2
+Gaurav rolled a 2 and moved from 20 to 22
+Dice Value: 2
+Sagar rolled a 2 and moved from 22 to 24
+Dice Value: 4
+Gaurav rolled a 4 and moved from 22 to 26
+Dice Value: 2
+Sagar rolled a 2 and moved from 24 to 26
+Dice Value: 1
+Gaurav rolled a 1 and moved from 26 to 46
+Dice Value: 1
+Sagar rolled a 1 and moved from 26 to 46
+Dice Value: 4
+Gaurav rolled a 4 and moved from 46 to 50
+Dice Value: 5
+Sagar rolled a 5 and moved from 46 to 68
+Dice Value: 6
+Gaurav rolled a 6 and moved from 50 to 53
+Dice Value: 3
+Sagar rolled a 3 and moved from 68 to 91
+Dice Value: 6
+Gaurav rolled a 6 and moved from 53 to 59
+Dice Value: 1
+Sagar rolled a 1 and moved from 91 to 92
+Dice Value: 6
+Gaurav rolled a 6 and moved from 59 to 84
+Dice Value: 6
+Sagar rolled a 6 and moved from 92 to 64
+Dice Value: 2
+Gaurav rolled a 2 and moved from 84 to 86
+Dice Value: 5
+Sagar rolled a 5 and moved from 64 to 69
+Dice Value: 1
+Gaurav rolled a 1 and moved from 86 to 87
+Dice Value: 2
+Sagar rolled a 2 and moved from 69 to 91
+Dice Value: 1
+Gaurav rolled a 1 and moved from 87 to 16
+Dice Value: 5
+Sagar rolled a 5 and moved from 91 to 96
+Dice Value: 4
+Gaurav rolled a 4 and moved from 16 to 20
+Dice Value: 3
+Sagar rolled a 3 and moved from 96 to 99
+Dice Value: 5
+Gaurav rolled a 5 and moved from 20 to 25
+Dice Value: 3
+Sagar rolled a 3 and moved from 99 to 99
+Dice Value: 1
+Gaurav rolled a 1 and moved from 25 to 26
+Dice Value: 3
+Sagar rolled a 3 and moved from 99 to 99
+Dice Value: 3
+Gaurav rolled a 3 and moved from 26 to 29
+Dice Value: 4
+Sagar rolled a 4 and moved from 99 to 99
+Dice Value: 4
+Gaurav rolled a 4 and moved from 29 to 6
+Dice Value: 2
+Sagar rolled a 2 and moved from 99 to 99
+Dice Value: 2
+Gaurav rolled a 2 and moved from 6 to 8
+Dice Value: 5
+Sagar rolled a 5 and moved from 99 to 99
+Dice Value: 5
+Gaurav rolled a 5 and moved from 8 to 13
+Dice Value: 5
+Sagar rolled a 5 and moved from 99 to 99
+Dice Value: 3
+Gaurav rolled a 3 and moved from 13 to 16
+Dice Value: 2
+Sagar rolled a 2 and moved from 99 to 99
+Dice Value: 2
+Gaurav rolled a 2 and moved from 16 to 18
+Dice Value: 5
+Sagar rolled a 5 and moved from 99 to 99
+Dice Value: 5
+Gaurav rolled a 5 and moved from 18 to 23
+Dice Value: 4
+Sagar rolled a 4 and moved from 99 to 99
+Dice Value: 6
+Gaurav rolled a 6 and moved from 23 to 29
+Dice Value: 5
+Sagar rolled a 5 and moved from 99 to 99
+Dice Value: 3
+Gaurav rolled a 3 and moved from 29 to 32
+Dice Value: 5
+Sagar rolled a 5 and moved from 99 to 99
+Dice Value: 1
+Gaurav rolled a 1 and moved from 32 to 6
+Dice Value: 6
+Sagar rolled a 6 and moved from 99 to 99
+Dice Value: 6
+Gaurav rolled a 6 and moved from 6 to 12
+Dice Value: 6
+Sagar rolled a 6 and moved from 99 to 99
+Dice Value: 6
+Gaurav rolled a 6 and moved from 12 to 18
+Dice Value: 1
+Sagar rolled a 1 and moved from 99 to 100
+Sagar has won!!
+

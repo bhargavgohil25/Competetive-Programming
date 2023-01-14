@@ -4,7 +4,7 @@
 // we can say that its a cyclic Graph...
 
 
-class Cylce - detection - Directed - BFS {
+class Cylce_detection_Directet_BFS {
 public:
   bool isCyclic(int N, vector<int> adj[]) {
     vector<int> indegree(N, 0);
